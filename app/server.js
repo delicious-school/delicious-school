@@ -8,6 +8,7 @@ const app = express();
 const compiler = webpack(webpackConfig);
 
 app.use(webpackDevMiddleware(compiler, {
+  noInfo: true,
   lazy: false,
   watchOptions: {
     aggregateTimeout: 300,

@@ -1,7 +1,7 @@
 {
   "name": "es6-project-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "ES6 Project Demo =================",
   "main": "index.js",
   "scripts": {
     "start": "babel-node app/server.js --ignore 'node_modules/' || exit 0",
@@ -30,5 +30,13 @@
     "lodash": "^4.14.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goddessting/es6-project-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/goddessting/es6-project-demo/issues"
+  },
+  "homepage": "https://github.com/goddessting/es6-project-demo#readme"
 }

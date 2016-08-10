@@ -1,11 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Es6 Project Demo</title>
+    <meta charset="UTF-8">
+    <title>Delicious School</title>
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-	<div id='content'></div>
-	<script src="/assets/bundle.js"></script>
+<script src="../public/index.js"></script>
+
+<div id="div">
+    <div id="main-log"><pre>登录</pre></div>
+    <div id="div1">
+        用户名：
+        <input id="input" type="text"/><br>
+        密  码：
+        <input id="password" type="password"/>
+    </div>
+    <div id="div3">
+         <button onclick="log()">登录</button> <button id="click-reset" onclick="reset()">重置</button>
+    </div>
+</div>
 </body>
 </html>

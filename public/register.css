@@ -1,0 +1,47 @@
+#body{
+    width:462px;
+    height:360px;
+    border: 1px solid;
+    margin: 100px auto;
+    background-color: lavender;
+}
+    #body-head{
+        width:60px;
+        height: 15px;
+        margin:10px auto;
+        font-size: 1.6em;
+    }
+    #body-main{
+        width:100%;
+        height:230px;
+        margin-top: 50px;
+    }
+        #school{
+            margin: 30px auto;
+            width: 70%;
+        }
+        #username{
+            margin: 30px auto;
+            width: 70%;
+        }
+        #password{
+            margin: 30px auto;
+            width: 70%;
+        }
+            #password-check{
+                margin: 30px auto;
+                width: 70%;
+            }
+            input{
+                height: 16px;
+                float: right;
+            }
+            #submit{
+                height: 30px;
+            }
+#body-foot{
+    height: 30px;
+    width: 50px;
+    margin:10px auto;
+    margin-top: 0px;
+}

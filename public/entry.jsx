@@ -1,11 +1,16 @@
-import Hello from './hello.jsx';
+import a from './hello.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import { Router, Route, hashHistory } from 'react-router';
 
 ReactDOM.render(
-  <Hello />,
-  document.getElementById("content")
+    <Router history={hashHistory}>
+      <Route path="/index" component={a.Hello}/>
+      <Route path="/main" component={a.Main}/>
+    </Router>,
+    document.getElementById("content")
+
 );
 
 // use jquery

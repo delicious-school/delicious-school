@@ -16,10 +16,6 @@
         height:230px;
         margin-top: 50px;
     }
-        #school{
-            margin: 30px auto;
-            width: 70%;
-        }
         #username{
             margin: 30px auto;
             width: 70%;
@@ -28,10 +24,7 @@
             margin: 30px auto;
             width: 70%;
         }
-            #password-check{
-                margin: 30px auto;
-                width: 70%;
-            }
+
             input{
                 height: 16px;
                 float: right;

@@ -1,0 +1,21 @@
+* {
+    font-family: "Abyssinica SIL";
+    font-size: 1em;
+    font-style: normal;
+    margin: 0px;
+    padding: 0px;
+}
+
+#menu {
+    width: 80%;
+    margin: 100px auto;
+    height: 500px;
+    border: 2px solid;
+
+}
+
+input{
+    width: 60px;
+    height: 28px;
+    background-color: ivory;
+}

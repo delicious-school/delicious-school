@@ -6,16 +6,19 @@ function showMessage(message) {
 function log() {
     let name = $("#input").val();
     let password = $("#password").val();
-    // auto
+    // $.post('./', function (data) {
+    // if(data === true){
+    top.location = '';
+    // }
+    // })
 }
 
 function reset() {
-    // document.getElementById("t").value="";
-    $("#click-reset").click(function (){
+    $("#click-reset").click(function () {
         $("#input").val('');
     });
 
-    $("#click-reset").click(function (){
+    $("#click-reset").click(function () {
         $("#password").val('');
     });
 }

@@ -6,19 +6,22 @@ function showMessage(message) {
 function log() {
     let name = $("#input").val();
     let password = $("#password").val();
-    // $.post('./', function (data) {
-    // if(data === true){
-    top.location = '';
-    // }
-    // })
+    start(name, password);
+    alert(name, password);
 }
 
+function start(name, password) {
+    $.get('./judge/'+name,function (result) {
+        alert(result);
+    })
+}
 function reset() {
-    $("#click-reset").click(function () {
+    // document.getElementById("t").value="";
+    $("#click-reset").click(function (){
         $("#input").val('');
     });
 
-    $("#click-reset").click(function () {
+    $("#click-reset").click(function (){
         $("#password").val('');
     });
 }

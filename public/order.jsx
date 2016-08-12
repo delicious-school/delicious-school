@@ -7,6 +7,7 @@ export default class Order extends Component {
             <div>
                 <div>细面之家</div>
                 <div>炒细面</div>
+                <div>$6</div>
                 <Link to='/main'>返回主页</Link>
             </div>
         );

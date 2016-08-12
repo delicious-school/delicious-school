@@ -9,11 +9,12 @@ export default class Register extends Component {
                     用户名：
                     <input type="text"/><br />
                     密 码：
-                    <input type="password"  /><br />
+                    <input type="password"/><br />
                     <Link to='/login'><input type="submit" value="注册"/></Link>
                 </form>
             </div>
-        )}
+        )
+    }
 }
 
 

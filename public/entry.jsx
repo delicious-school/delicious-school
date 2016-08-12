@@ -32,7 +32,7 @@ ReactDOM.render(
 );
 
 // use jquery
-
+console.log($('#content').text());
 
 // Notice!!!
 // Following is required to make reloading happen

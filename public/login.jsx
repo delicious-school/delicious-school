@@ -5,7 +5,7 @@ export default class Login extends Component {
     render() {
         return (
             <div>
-                <form>
+                <form >
                     用户名：
                     <input id="name" name="name" type="text"/><br />
                     密 码：

@@ -7,10 +7,10 @@ export default class Register extends Component {
             <div>
                 <form >
                     用户名：
-                    <input id="name" name="name" type="text"/><br />
+                    <input type="text"/><br />
                     密 码：
-                    <input id="password" name="password" type="password"  /><br />
-                    <Link to='/login'><input id="register" type="submit" value="注册"/></Link>
+                    <input type="password"  /><br />
+                    <Link to='/login'><input type="submit" value="注册"/></Link>
                 </form>
             </div>
         )}

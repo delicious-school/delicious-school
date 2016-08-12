@@ -1,4 +1,3 @@
-// import Hello from './hello.jsx';
 import App from './app.jsx';
 import Main from './main.jsx';
 import MealInfo from './mealinfo.jsx';
@@ -36,8 +35,7 @@ ReactDOM.render(
 // use jquery
 console.log($('#content').text());
 
-// Notice!!!
-// Following is required to make reloading happen
+
 if (module.hot) {
   module.hot.accept();
 }

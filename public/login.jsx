@@ -7,10 +7,10 @@ export default class Login extends Component {
             <div>
                 <form >
                     用户名：
-                    <input id="name" name="name" type="text"/><br />
+                    <input name="name" type="text"/><br />
                     密 码：
-                    <input id="password" name="password" type="password"  /><br />
-                    <Link to='main'><input id="login" type="submit" value="登录"/></Link>
+                    <input type="password"  /><br />
+                    <Link to='/main'><input type="submit" value="登录"/></Link>
                 </form>
             </div>
         )}

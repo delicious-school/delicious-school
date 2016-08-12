@@ -26,4 +26,18 @@ class Main extends React.Component {
     }
 }
 
-export default {Hello,Main};
+class BusinessList extends React.Component{
+    render(){
+        return (
+            <div>
+                <p className="businessList">商家列表</p>
+                <a className="businessName" href="#">细面之家</a>
+                <p className="businessList">菜品信息</p>
+                <a className="food" href="#">抄细面</a>
+
+            </div>
+        );
+    }
+}
+
+export default {Hello,Main,BusinessList};

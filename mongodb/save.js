@@ -3,14 +3,16 @@
  */
 var db = require('./connect');
 var User = require('../entity/user');
-
-var aym = new User({
-    username:"1",
-    password:"1"
-});
+var Dish = require('../entity/dish');
+var Dishes = require('../entity/dishes.json');
 db.connect();
-aym.save(function(err){
-    if(err) throw err;
-    console.log("user saved");
-    db.close;
-});
+// var aym = new User({
+//     username:"1",
+//     password:"1"
+// });
+
+// aym.save(function(err){
+//     if(err) throw err;
+//     console.log("user saved");
+//     db.close;
+// });

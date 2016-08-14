@@ -3,31 +3,48 @@
  */
 var db = require('./connect');
 var User = require('../entity/user');
-
-exports.find = function (req,res) {
-    debugger;
+db.connect();
+exports.find = function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
-    db.connect();
-    User.findOne({username:username,password:password},function(err,users){
+    User.findOne({username: username, password: password}, function (err, users) {
         console.log(users);
-        if(err) throw err;
+        if (err) throw err;
         res.send(users);
+        console.log('meiyou send');
+
     });
 };
+exports.register = function (req, res) {
+    let username = req.body.username;
+    let password = req.body.password;
+    User.findOne({username: username, password: password}, function (err, users) {
+        if (err) throw err;
+        if (users) {
+            res.send(false);
+        } else {
+            const user = new User({username: username, password: password});
+            user.save(function (err) {
+                if (err) throw err;
+                res.send(true);
+            });
+        }
+    })
+}
 
 
 
 
 
-exports.save = function (req,res) {
-    var aym = new User({
-        name:"cat",
-        password:"123456",
-        phone:"15678945623"
-    });
-    aym.save(function(err){
-        if(err) throw err;
-        res.send("success");
-    });
-};
+
+
+
+
+
+
+
+
+
+
+
+

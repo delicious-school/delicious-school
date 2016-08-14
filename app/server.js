@@ -28,6 +28,7 @@ app.use(webpackHotMiddleware(compiler, {
 
 app.use(express.static('./public'));
 app.post('/login',execute.find);
+ app.post('/register',execute.register);
 
 app.listen(3000, function() {
   console.log('Listening on 3000');

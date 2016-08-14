@@ -6,6 +6,9 @@ import express from 'express';
 import execute from '../mongodb/execute';
 let bodyParser = require("body-parser");
 
+// import db from './db/db';
+// import {Student} from './db/schema';
+
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -13,25 +16,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  lazy: false,
-  watchOptions: {
-    aggregateTimeout: 300,
-    poll: true
-  },
-  publicPath: webpackConfig.output.publicPath
+    noInfo: true,
+    lazy: false,
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: true
+    },
+    publicPath: webpackConfig.output.publicPath
 }));
 
 app.use(webpackHotMiddleware(compiler, {
-  log: console.log
+    log: console.log
 }));
 
 app.use(express.static('./public'));
-app.post('/login',execute.find);
- app.post('/register',execute.register);
+app.post('/login', execute.findUser);
+app.post('/register', execute.register);
+app.post('/init',execute.findDish);
 
-app.listen(3000, function() {
-  console.log('Listening on 3000');
+
+app.listen(3000, function () {
+    console.log('Listening on 3000');
 });
 
 

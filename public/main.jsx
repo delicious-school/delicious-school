@@ -5,20 +5,16 @@ import $ from 'jquery';
 import _ from 'lodash';
 
 export default class Main extends Component {
-  // render() {
-  //     return (
-  //       <div><Link to='mealInfo'>这里是主页面</Link></div>
-  //     )
-  // }
+
 
   constructor(props) {
 
-      super(props);
-      this.state = {
-        dishes: []
-      };
-      this.initData();
-      this.dishView();
+    super(props);
+    this.state = {
+      dishes: []
+    };
+    this.initData();
+    this.dishView = this.dishView.bind(this);
   }
 
   render() {
@@ -55,26 +51,32 @@ export default class Main extends Component {
   initData() {
     const self = this;
     $.post('/init', function (dishes) {
-      alert('post--------------------post');
       self.setState({
         dishes: dishes
-      })
+      });
     });
   }
 
-  dishView(){
-    // return () => {
-    //   const self = this;
-    //   $.ajax({
-    //     url: '/students/' + id,
-    //     type: 'DELETE',
-    //     success: function (result) {
-    //       const remainStudents = _.filter(self.state.students, s => s._id !== id);
-    //       self.setState({
-    //         students: remainStudents
-    //       });
-    //     }
-    //   });
-    // }
+  dishView(id) {
+    return ()=> {
+      self.location = "/#/meal-info/" + id;
+    }
   }
+
+  // dishView(){
+  //   return () => {
+  //     const self = this;
+  //     $.ajax({
+  //       url: '/students/' + id,
+  //       type: 'GET',
+  //       success: function (result) {
+  //         const remainStudents = _.filter(self.state.students, s => s._id !== id);
+  //         self.setState({
+  //           students: remainStudents
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 }
+

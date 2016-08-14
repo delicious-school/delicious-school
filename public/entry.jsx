@@ -16,18 +16,21 @@ require('./style.css');
 
 const router = <Router history={hashHistory}>
   <Route path='/' component={App}>
-    <IndexRoute component={Login} />
-    <Route path='login' component={Login} />
-    <Route path='register' component={Register} />
-    <Route path='main' component={Main} />
-    <Route path='mealInfo' component={MealInfo} />
+    <IndexRoute component={Login}/>
+    <Route path='login' component={Login}/>
+    <Route path='register' component={Register}/>
+    <Route path='main' component={Main}/>
+    <Route path='meal-info(/:id)' component={MealInfo}/>
     <Route path='order' component={Order}/>
   </Route>
 </Router>;
+/*<Redirect from="main" to="meal-info/:id" params={{mealId: SESSION.MEAL_ID}} handler={MealInfo} />*/
+
+
 
 ReactDOM.render(
-    router,
-    document.getElementById('content')
+  router,
+  document.getElementById('content')
 );
 
 // use jquery

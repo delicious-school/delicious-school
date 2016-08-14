@@ -5,7 +5,9 @@ var db = require('./connect');
 var User = require('../entity/user');
 var Dish = require('../entity/dish');
 var Dishes = require('../entity/dishes.json');
+
 db.connect();
+
 // var aym = new User({
 //     username:"1",
 //     password:"1"

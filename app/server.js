@@ -33,7 +33,8 @@ app.use(express.static('./public'));
 app.post('/login', execute.findUser);
 app.post('/register', execute.register);
 app.post('/init',execute.findDish);
-
+app.post('/mealInfo',execute.finsDishInfoById);
+app.post('/saveOrder',execute.saveOrder);
 
 app.listen(3000, function () {
     console.log('Listening on 3000');

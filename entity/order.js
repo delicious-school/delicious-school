@@ -9,14 +9,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var orderSchema = new Schema({
+    username:String,
+    dishstore:String,
     dishname:String,
     dishprice:String,
-    dishstore:String,
-    orderstates:String,
-    dishescount:String
+    dishescount:String,
+    orderstates:String
 });
 
 // the collection's name is `orders`
-var Dish = mongoose.model('Order', orderSchema);
+var Order = mongoose.model('Order', orderSchema);
 
-module.exports = Dish;
+module.exports = Order;

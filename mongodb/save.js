@@ -5,16 +5,21 @@ var db = require('./connect');
 var User = require('../entity/user');
 var Dish = require('../entity/dish');
 var Dishes = require('../entity/dishes.json');
+var Order = require('../entity/order');
 
 db.connect();
+// var Order = new Schema;
+var orderSchema = new Order({
+    username:'liuliu',
+    dishstore:'1号店',
+    dishname:'虾仁西兰花',
+    dishprice:'12',
+    dishescount:'1',
+    orderstates:'1'
+});
 
-// var aym = new User({
-//     username:"1",
-//     password:"1"
-// });
-
-// aym.save(function(err){
-//     if(err) throw err;
-//     console.log("user saved");
-//     db.close;
-// });
+orderSchema.save(function(err){
+    if(err) throw err;
+    console.log("saved");
+    db.close;
+});

@@ -12,7 +12,6 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 require('jquery');
 require("bootstrap-webpack");
-require('./style.css');
 
 const router = <Router history={hashHistory}>
   <Route path='/' component={App}>

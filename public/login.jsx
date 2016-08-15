@@ -16,6 +16,7 @@ export default class Login extends Component {
       async: true,
       data: {username: username, password: password},
       success: function (result) {
+        alert(result + '=======================');
         if (result) {
           self.location = "/#/main";
         } else {

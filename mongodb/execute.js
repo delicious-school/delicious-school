@@ -8,14 +8,13 @@ var User = require('../entity/user');
 var Order = require('../entity/order');
 import Dish from '../entity/dish';
 db.connect();
+
 exports.findUser = function (req, res) {
     let username = req.body.username;
     let password = req.body.password;
     User.findOne({username: username, password: password}, function (err, users) {
-        console.log(users);
         if (err) throw err;
         res.send(users);
-        console.log('meiyou send');
 
     });
 };
@@ -39,7 +38,6 @@ exports.findDish = function (req, res) {
     Dish.find({}, function (err, dishes) {
         if (err) throw err;
         if (dishes) {
-            console.log(dishes);
             res.send(dishes);
         } else {
             res.send(false);
@@ -47,34 +45,25 @@ exports.findDish = function (req, res) {
     })
 };
 exports.finsDishInfoById = function (req, res) {
-    let dishname = req.body.dishname;
-    console.log(dishname + "+++++++++++++");
-    Dish.findOne({dishname: dishname}, function (err, dishes) {
-        // Dish.findOne({_id:req.body.dishId},function(err, dishes){
+    let id = req.body.id;
+    Dish.findOne({_id: id}, function (err, dishes) {
         if (err) throw err;
-        console.log(dishes);
         res.send(dishes);
     })
 };
 exports.saveOrder = function (req, res) {
-    console.log('saveOrder++++++++++++++++');
+    // console.log('saveOrder++++++++++++++++\n'+ req.body);
+    // console.log('saveOrder++++++++++++++++\n'+ typeof (req.body));
+
     //计算点菜人数，标记状态，存入数据库
-    // const order =new Order({
-    //         dishname: this.state.mealInfo.dishname,
-    //         dishprice: this.state.mealInfo.dishprice,
-    //         dishstore: this.state.mealInfo.dishstore，
-    //         orderstates:'waiting',
-    //         dishescount:count
-    //     }
-    // );
-    // order.save(function(err){
-    //     if (err) {
-    //         res.send(false)
-    //     }else {
-    //         res.send(true);
-    //     }
-    // })
-    res.send(true);
+    const order =new Order(req.body);
+    console.log(order);
+    order.save(function (err) {
+        if (err) {
+            res.send(false);
+        }
+        res.send(true);
+    })
 };
 
 

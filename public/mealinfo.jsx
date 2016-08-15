@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import $ from 'jquery';
-
+let count = 1;
 
 export default class MealInfo extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      mealInfo:'mei you cai!'
+      mealInfo: 'mei you cai!',
+      // count: 0
       // id:location.query.id
     };
     this.dishInformation();
@@ -17,37 +19,60 @@ export default class MealInfo extends Component {
     const dishname = this.state.mealInfo.dishname,
       dishprice = this.state.mealInfo.dishprice,
       dishstore = this.state.mealInfo.dishstore;
+
     return (
       <div>
         <ul>
-          <li>{dishname}-----dishname</li>
-          <li>{dishprice}-----dishprice</li>
-          <li>{dishstore}-----dishstore</li>
+          <h4>菜品详情</h4>
+          <li>{dishname}</li>
+          <li>{dishprice}</li>
+          <li>{dishstore}</li>
+          <li>
+            <button onClick={this.addCount(-1)}>减</button>
+            <span className="count">{count}</span>
+            <button onClick={this.addCount(1)}>加</button>
+          </li>
         </ul>
-        <button onClick={this.myOrder(dishname,dishprice,dishstore)}>预定</button>
+        <button onClick={this.myOrder(dishname, dishprice, dishstore, this.state.count)}>预定</button>
         <button><Link to="/main">返回</Link></button>
       </div>
     )
   }
 
-
   dishInformation() {
     const self = this;
-    // const id = self.props.location.id;
-    const name = '虾仔排骨面';
-    $.post('/mealInfo',{dishname:name}, function (mealInfo) {
-    // $.post('/mealInfo',{dishId:id}, function (mealInfo) {
-    //   alert('postMealinfo--------------------postMealInfo'+mealInfo);
+    const url = location.href;
+    let id = url.split('=')[1].split('&')[0];
+    $.post('/mealInfo', {id: id}, function (mealInfo) {
       self.setState({
-        mealInfo: mealInfo
+        mealInfo: mealInfo,
+        // count:1
       });
     });
   }
-  myOrder(dishname,dishprice,dishstore) {
-    return ()=> {
-      alert('yuding     =====================');
 
-      $.post('/saveOrder', {dishname: dishname, dishprice: dishprice, dishstore: dishstore}, function (result) {
+  addCount(num) {
+    return ()=> {
+      count += num;
+      if (count <= 0) {
+        count = 1;
+      }
+      $('.count').html(count);
+      // this.setState.count=count;
+    }
+  }
+
+  myOrder(dishname, dishprice, dishstore, count) {
+    return ()=> {
+      const dishOrder = {
+        username: '',
+        dishname: dishname,
+        dishprice: dishprice,
+        dishstore: dishstore,
+        dishescount: count,
+        orderstates: '1'
+      };
+      $.post('/saveOrder', dishOrder, function (result) {
         if (result) {
           alert('预定成功！')
         } else {

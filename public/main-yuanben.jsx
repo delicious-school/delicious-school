@@ -5,58 +5,38 @@ import $ from 'jquery';
 import _ from 'lodash';
 
 
+
 export default class Main extends Component {
+
+
   constructor(props) {
+
     super(props);
     this.state = {
       dishes: []
     };
     this.initData();
     this.dishView = this.dishView.bind(this);
-
   }
 
   render() {
-    const stores = this.state.dishes.reduce((result, {dishstore})=> {
-      let found = result.find((item)=>item === dishstore);
-      if (!found) {
-        result.push(dishstore);
-      }
-      return result;
-    }, []);
-
-    const storesRows = stores.map(item=>
-      <li>{item}</li>
-    );
-
-    const dishesRows = this.state.dishes.map(dish=>
+    const dishesRows = this.state.dishes.map(dish =>
       <tr key={dish._id}>
         <td>{dish.dishname}</td>
         <td>{dish.dishprice}</td>
-        <td>{dish.dishstore}</td>
-        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <td>
-          <button onClick={this.dishView(dish._id)}>查看</button>
+          <button onClick={this.dishView(dish._id)}>查看菜品详情</button>
         </td>
       </tr>
     );
-
     return (
       <div>
-        <div>
-          <h4>商家</h4>
-          <ul>
-            {storesRows}
-          </ul>
-        </div>
-        <hr />
         <div>
           <table>
             <thead>
             <tr>
               <th>菜名</th>
               <th>价格</th>
-              <th>商家</th>
             </tr>
             </thead>
             <tbody>
@@ -76,8 +56,6 @@ export default class Main extends Component {
       });
     });
   }
-
-
 
   dishView(id) {
     return ()=> {

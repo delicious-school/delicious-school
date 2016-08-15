@@ -1,0 +1,14 @@
+.body-margin{
+    margin-top: 20px;
+}
+
+.price-color{
+    color: red;
+    font-size: 1.6em;
+}
+
+.btn-meal-info {
+    line-height: 30px;
+    margin-top: 25px;
+    float: right;
+}

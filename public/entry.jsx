@@ -10,22 +10,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 require('jquery');
 require("bootstrap-webpack");
-require('./style.css');
+require('../style/main.css');
+require('../style/login.css');
+require('../style/register.css');
+require('../style/meal-info.css');
+require('../style/order.css');
 
 const router = <Router history={hashHistory}>
   <Route path='/' component={App}>
-    <IndexRoute component={Main} />
-    <Route path='/main' component={Main} />
-    <Route path='/login' component={Login} />
-    <Route path='/register' component={Register} />
-    <Route path='/meal-info' component={MealInfo} />
+    <IndexRoute component={Main}/>
+    <Route path='/main' component={Main}/>
+    <Route path='/login' component={Login}/>
+    <Route path='/register' component={Register}/>
+    <Route path='/meal-info' component={MealInfo}/>
     <Route path='/order' component={Order}/>
   </Route>
 </Router>;
 
 ReactDOM.render(
-    router,
-    document.getElementById('content')
+  router,
+  document.getElementById('content')
 );
 
 // Notice!!!

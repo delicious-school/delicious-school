@@ -1,0 +1,28 @@
+#myCarousel {
+    width: 100%;
+    height: 370px;
+}
+
+.store-list{
+    text-align: center;
+    background-color: #390c20;
+    margin-top: 5px;
+    color: #f8f8f8;
+    border-radius: 15px;
+}
+
+.list-head{
+    font-size: large;
+    border-radius: 15px;
+    margin-top: 15px;
+}
+
+
+.picture-margin{
+    padding: 10px;
+}
+
+.meal-set{
+    text-align: center;
+}
+

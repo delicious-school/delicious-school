@@ -3,26 +3,30 @@
     height: 370px;
 }
 
-.store-list{
+.store-list {
     text-align: center;
     background-color: #390c20;
     margin-top: 5px;
-    color: #f8f8f8;
+    color: #337ab7 !important;
     border-radius: 15px;
 }
 
-.list-head{
+.list-head {
     font-size: large;
     border-radius: 15px;
     margin-top: 15px;
 }
 
-
-.picture-margin{
+.picture-margin {
     padding: 10px;
 }
 
-.meal-set{
+.float-left-picture h4 {
     text-align: center;
 }
 
+.float-left-picture {
+    float: left;
+    overflow: hidden;
+    width: 33%;
+}

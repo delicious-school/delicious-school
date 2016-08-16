@@ -1,9 +1,9 @@
-ES6 Project Demo
+Delicious School
 =================
 
 CI status: ![Build Status](https://travis-ci.org/js-demos/es6-project-demo.png?branch=master)
 
-A basic es6 project, which includes:
+Delicious School which includes:
 
 1. webpack
 2. babel
@@ -19,9 +19,8 @@ npm install
 npm start
 ```
 
-Then visit <http://localhost:3000>, you will see `Hello world` on the page.
+Then visit <http://localhost:3000>
 
-If you modify `public/hello.jsx` to change the text, you will see the changes are applied to page instantly.
 
 
 

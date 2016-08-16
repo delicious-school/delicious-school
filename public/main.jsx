@@ -1,8 +1,42 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import $ from 'jquery';
+import _ from 'lodash';
+
 
 export default class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dishes: []
+    };
+    this.initData();
+    this.dishView = this.dishView.bind(this);
+
+  }
+
   render() {
+    const stores = this.state.dishes.reduce((result, {dishstore})=> {
+      let found = result.find((item)=>item === dishstore);
+      if (!found) {
+        result.push(dishstore);
+      }
+      return result;
+    }, []);
+
+    const storesRows = stores.map(item=>
+      <Link to="#" className="list-group-item store-list">{item}</Link>
+    );
+
+    const dishesRows = this.state.dishes.map(dish=>
+      <div className="float-left-picture">
+        <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
+             src="./img/4.jpg"/>
+        <h4 onClick={this.dishView(dish._id)}>{dish.dishname}</h4>
+      </div>
+    );
+
+
     return (
       <div className="container-fluid">
         <div className="main-head">
@@ -37,53 +71,33 @@ export default class Main extends Component {
 
         <div className="row">
           <div className="col-md-3">
-            <Link to="#" className="list-group-item store-list list-head">商家列表</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
-            <Link to="#" className="list-group-item store-list">糕点屋</Link>
+            <h2 className="list-group-item store-list list-head">商家列表</h2>
+            {storesRows}
           </div>
           <div className="col-md-9">
-            <table className="table table-bordered meal-set">
-              <tr>
-                <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
-                  <Link to="meal-info">
-                    <h4>芒果空气感蛋糕</h4>
-                  </Link>
-                </td>
-                <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
-                  <h4>芒果空气感蛋糕</h4>
-                </td>
-                <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
-                  <h4>芒果空气感蛋糕</h4>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
-                  <h4>芒果空气感蛋糕</h4>
-                </td>
-                <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
-                  <h4>芒果空气感蛋糕</h4>
-                </td>
-                <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
-                  <h4>芒果空气感蛋糕</h4>
-                </td>
-              </tr>
-            </table>
+            {dishesRows}
           </div>
         </div>
       </div>
 
     );
   }
+
+  initData() {
+    const self = this;
+    $.post('/init', function (dishes) {
+      self.setState({
+        dishes: dishes
+      });
+    });
+  }
+
+  dishView(id) {
+    return ()=> {
+      self.location = "/#/meal-info/?id=" + id;
+    }
+  }
 }
+
+
+

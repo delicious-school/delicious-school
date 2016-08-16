@@ -56,22 +56,22 @@ export default class Main extends Component {
                   </Link>
                 </td>
                 <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
+                  <img className="img-responsive center-block picture-margin" src="./img/5.jpg"/>
                   <h4>芒果空气感蛋糕</h4>
                 </td>
                 <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
+                  <img className="img-responsive center-block picture-margin" src="./img/3.jpg"/>
                   <h4>芒果空气感蛋糕</h4>
                 </td>
               </tr>
 
               <tr>
                 <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
+                  <img className="img-responsive center-block picture-margin" src="./img/5.jpg"/>
                   <h4>芒果空气感蛋糕</h4>
                 </td>
                 <td>
-                  <img className="img-responsive center-block picture-margin" src="./img/4.jpg"/>
+                  <img className="img-responsive center-block picture-margin" src="./img/3.jpg"/>
                   <h4>芒果空气感蛋糕</h4>
                 </td>
                 <td>

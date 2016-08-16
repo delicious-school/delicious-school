@@ -2,13 +2,13 @@ import Login from './login.jsx';
 import Register from './register.jsx';
 import App from './app.jsx';
 import Main from './main.jsx';
-import MealInfo from './mealinfo.jsx';
+import MealInfo from './meal-info.jsx';
 import Order from './order.jsx';
 
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
+
 require('jquery');
 require("bootstrap-webpack");
 require('../style/main.css');

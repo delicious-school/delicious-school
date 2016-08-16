@@ -96,20 +96,3 @@ export default class MealInfo extends Component {
   }
 }
 
-// return (
-//   <div>
-//     <ul>
-//       <h4>菜品详情</h4>
-//       <li>{dishname}</li>
-//       <li>{dishprice}</li>
-//       <li>{dishstore}</li>
-//       <li>
-//         <button onClick={this.addCount(-1)}>减</button>
-//         <span className="count">{count}</span>
-//         <button onClick={this.addCount(1)}>加</button>
-//       </li>
-//     </ul>
-//     <button onClick={this.myOrder(dishname, dishprice, dishstore, this.state.count)}>预定</button>
-//     <button><Link to="/main">返回</Link></button>
-//   </div>
-// )

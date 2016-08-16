@@ -3,9 +3,9 @@
  */
 
 
-var db = require('./connect');
-var User = require('../entity/user');
-var Order = require('../entity/order');
+let db = require('./connect');
+let User = require('../entity/user');
+let Order = require('../entity/order');
 import Dish from '../entity/dish';
 db.connect();
 
@@ -52,10 +52,7 @@ exports.finsDishInfoById = function (req, res) {
     })
 };
 exports.saveOrder = function (req, res) {
-    // console.log('saveOrder++++++++++++++++\n'+ req.body);
-    // console.log('saveOrder++++++++++++++++\n'+ typeof (req.body));
-
-    //计算点菜人数，标记状态，存入数据库
+    //计算点菜人数，标记状态，存入数据库-----wait to do
     const order = new Order(req.body);
     console.log(order);
     order.save(function (err) {

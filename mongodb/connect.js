@@ -1,7 +1,7 @@
 /**
  * Created by SONY on 2016/8/11.
  */
-var mongoose = require("mongoose");
+let mongoose = require("mongoose");
 
 module.exports = {
     connect : function(){

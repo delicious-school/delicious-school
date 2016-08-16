@@ -28,8 +28,6 @@ export default class Register extends Component {
     })
   }
 
-
-  //const userInfo=
   render() {
     return (
       <div className="container-fluid">
@@ -64,14 +62,3 @@ export default class Register extends Component {
     )
   }
 }
-
-
-// return (
-//   <div>
-//     用户名：
-//     <input id="username" name="username" type="text"/><br />
-//     密 码：
-//     <input id="password" name="password" type="password"/><br />
-//     <input type="submit" value="注册" onClick={this.commit}/>
-//   </div>
-// )

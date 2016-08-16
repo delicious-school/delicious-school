@@ -1,7 +1,7 @@
 {
-  "name": "es6-project-demo",
+  "name": "Delicious School",
   "version": "1.0.0",
-  "description": "ES6 Project Demo =================",
+  "description": "Delicious School=================",
   "main": "index.js",
   "scripts": {
     "start": "babel-node app/server.js --ignore 'node_modules/' || exit 0",

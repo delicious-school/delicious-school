@@ -3,9 +3,13 @@ import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
+import execute from '../mongodb/execute';
+let bodyParser = require("body-parser");
 
 const app = express();
 const compiler = webpack(webpackConfig);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
@@ -22,11 +26,14 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static('./public'));
-
-app.get('/hello', function (req, res) {
-    res.send('Hello, world!');
-});
+app.post('/login', execute.findUser);
+app.post('/register', execute.register);
+app.post('/init', execute.findDish);
+app.post('/mealInfo', execute.finsDishInfoById);
+app.post('/saveOrder', execute.saveOrder);
 
 app.listen(3000, function () {
     console.log('Listening on 3000');
 });
+
+

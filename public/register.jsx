@@ -1,7 +1,35 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 import {Link} from 'react-router';
 
+
 export default class Register extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  commit() {
+    let username = $("#username").val();
+    let password = $("#password").val();
+    $.ajax({
+      url: '/register',
+      type: 'POST',
+      async: true,
+      data: {username: username, password: password},
+      success: function (result) {
+        if (result) {
+          location.href = "/#/main";
+        } else {
+          alert("用户名已存在！");
+          location.href = "/#/register";
+        }
+      }
+
+    })
+  }
+
+
+  //const userInfo=
   render() {
     return (
       <div className="container-fluid">
@@ -17,18 +45,18 @@ export default class Register extends Component {
             <h1 className="register-head">Delicious School</h1>
             <form>
               <div className="form-group register-user">
-                <input type="text" className="form-control" id="exampleInputEmail1" placeholder="请输入8位学号"/>
+                <input type="text" className="form-control" id="username" placeholder="请输入8位学号"/>
               </div>
 
               <div className="form-group register-password">
-                <input type="password" className="form-control" id="exampleInputPassword" placeholder="请输入密码(6-16位)"/>
+                <input type="password" className="form-control" id="password" placeholder="请输入密码(6-16位)"/>
               </div>
 
               <div className="form-group register-password">
                 <input type="password" className="form-control" id="exampleInputPassword1" placeholder="请确认密码"/>
               </div>
             </form>
-            <button type="button" className="btn btn-primary btn-block btn-register">注册</button>
+            <button type="button" onClick={this.commit} className="btn btn-primary btn-block btn-register">注册</button>
           </div>
           <div className="col-md-4"></div>
         </div>
@@ -38,3 +66,12 @@ export default class Register extends Component {
 }
 
 
+// return (
+//   <div>
+//     用户名：
+//     <input id="username" name="username" type="text"/><br />
+//     密 码：
+//     <input id="password" name="password" type="password"/><br />
+//     <input type="submit" value="注册" onClick={this.commit}/>
+//   </div>
+// )

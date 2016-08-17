@@ -4,6 +4,11 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
 import execute from '../mongodb/execute';
+import users from '../mongodb/users';
+
+let db = require('../mongodb/connect');
+db.connect();
+
 let bodyParser = require("body-parser");
 
 const app = express();
@@ -27,7 +32,7 @@ app.use(webpackHotMiddleware(compiler, {
 
 app.use(express.static('./public'));
 app.post('/login', execute.findUser);
-app.post('/register', execute.register);
+app.post('/api/users', users.register);
 app.post('/init', execute.findDish);
 app.post('/mealInfo', execute.finsDishInfoById);
 app.post('/saveOrder', execute.saveOrder);
@@ -35,5 +40,6 @@ app.post('/saveOrder', execute.saveOrder);
 app.listen(3000, function () {
     console.log('Listening on 3000');
 });
+
 
 

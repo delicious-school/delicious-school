@@ -1,5 +1,5 @@
 import Login from './login.jsx';
-import Register from './register.jsx';
+import Register from './register-yuan.jsx';
 import App from './app.jsx';
 import Main from './main.jsx';
 import MealInfo from './meal-info.jsx';

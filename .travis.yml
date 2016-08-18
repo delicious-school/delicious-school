@@ -6,6 +6,11 @@ env:
 language: node_js
 node_js:
   - "6"
+<<<<<<< bd7fee1102d876b28d61d96322572af658ea6696
 
 services:
 - mongodb
+=======
+  services:
+  - mongodb
+>>>>>>> nn

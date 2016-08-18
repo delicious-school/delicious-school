@@ -25,23 +25,31 @@
 
 .register-page {
     margin-top: 76px;
+    float: left;
 }
 
-.register-head {
-    color: #0f0f0f;
-    text-align: center;
+/*.register-head {*/
+/*color: #0f0f0f;*/
+/*text-align: center;*/
+/*}*/
 
+.picture-head {
+    align-content: center;
 }
 
 .register-user {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 .register-password {
     margin-top: 15px;
 }
 
-#username #password #exampleInputPassword1 {
-    width: 100%;
-}
+/*#username #password #exampleInputPassword1 {*/
+/*width: 100%;*/
+/*}*/
 
+.tips {
+    font-size: 14px;
+    color: red;
+}

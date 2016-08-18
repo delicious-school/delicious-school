@@ -5,7 +5,7 @@ let db = require("./connect");
 let User  = require("../entity/user");
 
 db.connect();
-User.remove({},function(err,user){
+User.remove({username:'12345678',password:'123456'},function(err,user){
     if(err) throw  err;
     console.log("delete users:");
     console.log(user);

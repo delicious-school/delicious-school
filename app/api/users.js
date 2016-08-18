@@ -16,17 +16,17 @@ router.post('/',function(req,res,next){
     User.findOne(requestUser, function (err, users) {
       if (err) return next(err);
       if (users) {
-        res.send(409);
+        res.sendStatus(409);
       } else {
         const user = new User({username: requestUser.username, password: requestUser.password});
         user.save(function (err) {
           if (err) return next(err);
-          res.send(201);
+          res.sendStatus(201);
         });
       }
     })
   } else {
-    res.send(400);
+    res.sendStatus(400);
   }
 });
 

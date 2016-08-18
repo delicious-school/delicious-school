@@ -1,17 +1,14 @@
-/**
- * Created by SONY on 2016/8/11.
- */
 let mongoose = require('mongoose');
 
 let Schema = mongoose.Schema;
 
 let orderSchema = new Schema({
-    username: String,
-    dishstore: String,
-    dishname: String,
-    dishprice: String,
-    dishescount: String,
-    orderstates: String
+  username: String,
+  dishstore: String,
+  dishname: String,
+  dishprice: String,
+  dishescount: String,
+  orderstates: String
 });
 
 // the collection's name is `orders`

@@ -1,6 +1,3 @@
-/**
- * Created by yoyo on 16-8-18.
- */
 import express from 'express';
 import usersApi from './users';
 

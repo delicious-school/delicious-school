@@ -1,42 +1,29 @@
-/**
- * Created by yoyo on 16-8-18.
- */
-
 import express from 'express';
+import User from '../db/entity/user';
+import validate from '../../share/validate';
 const router = express.Router();
-let User = require('../../entity/user');
 
-router.post('/',function(req,res,next){
+
+router.post('/', function (req, res, next) {
   const requestUser = {
     username: req.body.username,
     password: req.body.password
   };
-  let isValidate = validate(requestUser);
+  const isValidate = validate(requestUser);
   if (isValidate) {
-    User.findOne(requestUser, function (err, users) {
+    User.findOne({username: requestUser.username}, function (err, users) {
       if (err) return next(err);
       if (users) {
-        res.sendStatus(409);
-      } else {
-        const user = new User({username: requestUser.username, password: requestUser.password});
-        user.save(function (err) {
-          if (err) return next(err);
-          res.sendStatus(201);
-        });
+        return res.sendStatus(409);
       }
+      const user = new User(requestUser);
+      user.save(function (err) {
+        if (err) return next(err);
+        return res.sendStatus(201);
+      });
     })
-  } else {
-    res.sendStatus(400);
-  }
+  }else{
+  return res.sendStatus(400);}
 });
-
-function validate(user) {
-  if (user.username.length === 8 && (user.password.length <= 10 && user.password.length >= 6)) {
-    if (/^[0-9]*$/.test(user.username)) {
-      return true;
-    }
-  }
-  return false;
-}
 
 export default router;

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import $ from 'jquery';
-import _ from 'lodash';
 
 
 export default class Main extends Component {

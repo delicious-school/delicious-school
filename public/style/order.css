@@ -1,13 +1,13 @@
-.store{
+.store {
     background-color: wheat;
 }
 
-.store-width{
+.store-width {
     width: 160px;
     text-align: center;
     margin: 10px auto;
 }
 
-.meal-font{
+.meal-font {
     font-size: 1.6em;
 }

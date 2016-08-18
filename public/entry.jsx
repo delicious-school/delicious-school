@@ -11,11 +11,11 @@ import ReactDOM from 'react-dom';
 
 require('jquery');
 require("bootstrap-webpack");
-require('../style/main.css');
-require('../style/login.css');
-require('../style/register.css');
-require('../style/meal-info.css');
-require('../style/order.css');
+require('./style/main.css');
+require('./style/login.css');
+require('./style/register.css');
+require('./style/meal-info.css');
+require('./style/order.css');
 
 
 const router = <Router history={hashHistory}>

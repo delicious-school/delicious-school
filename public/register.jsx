@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import {Link} from 'react-router';
 import request from 'superagent';
 
@@ -9,7 +8,7 @@ export default class Register extends Component {
     super(props);
     this.state = {
       username: '',
-      password:''
+      password: ''
     }
   }
 
@@ -28,11 +27,13 @@ export default class Register extends Component {
             <h1 className="register-head">Delicious School</h1>
             <form onSubmit={this._onSubmit.bind(this)}>
               <div className="form-group register-user">
-                <input type="text" className="form-control" id="username" placeholder="请输入8位学号" value={this.state.username} onChange={this._onUsernameChange.bind(this)}/>
+                <input type="text" className="form-control" id="username" placeholder="请输入8位学号"
+                       value={this.state.username} onChange={this._onUsernameChange.bind(this)}/>
               </div>
 
               <div className="form-group register-password">
-                <input type="password" className="form-control" id="password" placeholder="请输入密码(6-16位)" value={this.state.password} onChange={this._onPasswordChange.bind(this)}/>
+                <input type="password" className="form-control" id="password" placeholder="请输入密码(6-16位)"
+                       value={this.state.password} onChange={this._onPasswordChange.bind(this)}/>
               </div>
 
               <div className="form-group register-password">
@@ -47,13 +48,13 @@ export default class Register extends Component {
     )
   }
 
-  _onUsernameChange(event){
+  _onUsernameChange(event) {
     this.setState({
       username: event.target.value
     })
   }
 
-  _onPasswordChange(event){
+  _onPasswordChange(event) {
     this.setState({
       password: event.target.value
     })
@@ -63,12 +64,12 @@ export default class Register extends Component {
     event.preventDefault();
     request.post('/api/users')
       .send({
-        username:this.state.username,
-        password:this.state.password
+        username: this.state.username,
+        password: this.state.password
       })
-      .end((err,res) => {
+      .end((err, res) => {
 
-        if(err) return console.error(err);
+        if (err) return console.error(err);
         //这里是前端处理  res：stateCode
         alert(res);
       })

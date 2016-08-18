@@ -22,8 +22,9 @@ router.post('/', function (req, res, next) {
         return res.sendStatus(201);
       });
     })
-  }else{
-  return res.sendStatus(400);}
+  } else {
+    return res.sendStatus(400);
+  }
 });
 
 export default router;

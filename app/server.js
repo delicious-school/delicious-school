@@ -5,7 +5,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
 
 import execute from './db/execute';
-import apiRouter from './api/api';
+import apiRouter from './api/index';
 
 let db = require('./db/connect');
 

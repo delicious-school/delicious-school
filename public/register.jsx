@@ -36,21 +36,21 @@ export default class Register extends Component {
                 <input type="text" className="form-control" id="username" onBlur={this._checkUsername.bind(this)}
                        placeholder="请输入8位学号"
                        value={this.state.username}
-                       onInput={this._onUsernameChanged.bind(this)}/>
+                       onChange={this._onUsernameChanged.bind(this)}/>
                 <div className="tips">{this.state.usernameError}</div>
               </div>
 
               <div className="form-group register-password">
                 <input type="password" className="form-control" id="password" onBlur={this._checkPassword.bind(this)}
                        placeholder="请输入密码(6-10位)" value={this.state.password}
-                       onInput={this._onPasswordChange.bind(this)}/>
+                       onChange={this._onPasswordChange.bind(this)}/>
                 <div className="tips">{this.state.passwordError}</div>
               </div>
 
               <div className="form-group register-password">
                 <input type="password" className="form-control" id="exampleInputPassword1"
                        onBlur={this._checkConfirmPassword.bind(this)}
-                       onInput={this._onConfirmPasswordChange.bind(this)} placeholder="请确认密码"/>
+                       onChange={this._onConfirmPasswordChange.bind(this)} placeholder="请确认密码"/>
                 <div className="tips">{this.state.confirmPasswordError}</div>
               </div>
               <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
@@ -96,10 +96,7 @@ export default class Register extends Component {
     this.setState({
       username: username,
       usernameError: ''
-    });
-    setTimeout(()=> {
-      this._determineIfEnableSubmitButton();
-    });
+    }, () => this._determineIfEnableSubmitButton());
   }
 
   _onPasswordChange(event) {
@@ -107,10 +104,7 @@ export default class Register extends Component {
     this.setState({
       password: password,
       passwordError: ''
-    });
-    setTimeout(()=> {
-      this._determineIfEnableSubmitButton();
-    });
+    }, () => this._determineIfEnableSubmitButton());
   }
 
   _onConfirmPasswordChange(event) {
@@ -118,10 +112,7 @@ export default class Register extends Component {
     this.setState({
       confirmPassword: confirmPassword,
       confirmPasswordError: ''
-    });
-    setTimeout(()=> {
-      this._determineIfEnableSubmitButton();
-    });
+    }, () => this._determineIfEnableSubmitButton());
   }
 
   _determineIfEnableSubmitButton() {

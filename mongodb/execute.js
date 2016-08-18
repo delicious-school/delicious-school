@@ -7,7 +7,7 @@ let db = require('./connect');
 let User = require('../entity/user');
 let Order = require('../entity/order');
 import Dish from '../entity/dish';
-db.connect();
+// db.connect();
 
 exports.findUser = function (req, res) {
     let username = req.body.username;

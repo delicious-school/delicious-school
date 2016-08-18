@@ -28,11 +28,6 @@
     float: left;
 }
 
-/*.register-head {*/
-/*color: #0f0f0f;*/
-/*text-align: center;*/
-/*}*/
-
 .picture-head {
     align-content: center;
 }
@@ -44,10 +39,6 @@
 .register-password {
     margin-top: 15px;
 }
-
-/*#username #password #exampleInputPassword1 {*/
-/*width: 100%;*/
-/*}*/
 
 .tips {
     font-size: 14px;

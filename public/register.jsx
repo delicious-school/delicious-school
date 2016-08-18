@@ -9,7 +9,12 @@ export default class Register extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      exampleInputPassword1: '',
+      usernameError: '',
+      passwordError: '',
+      confirmPasswordError: '',
+      submitButtonEnabled: false
     }
   }
 
@@ -28,24 +33,29 @@ export default class Register extends Component {
             <img className="img-responsive center-block picture-head" src="./img/name1.png"/>
             <form onSubmit={this._onSubmit.bind(this)}>
               <div className="form-group register-user">
-                <input type="text" className="form-control" id="username" onBlur={checkUsername} placeholder="请输入8位学号"
-                       value={this.state.username} onChange={this._onUsernameChange.bind(this)}/>
-                <div id="username-error" className=" tips"/>
+                <input type="text" className="form-control" id="username" onBlur={this._checkUsername.bind(this)}
+                       placeholder="请输入8位学号"
+                       value={this.state.username}
+                       onInput={this._onUsernameChanged.bind(this)}/>
+                <div className="tips">{this.state.usernameError}</div>
               </div>
 
               <div className="form-group register-password">
-                <input type="password" className="form-control" id="password" onBlur={checkPassword}
-                       placeholder="请输入密码(6-16位)" value={this.state.password}
-                       onChange={this._onPasswordChange.bind(this)}/>
-                <div id="password-error" className=" tips"/>
+                <input type="password" className="form-control" id="password" onBlur={this._checkPassword.bind(this)}
+                       placeholder="请输入密码(6-10位)" value={this.state.password}
+                       onInput={this._onPasswordChange.bind(this)}/>
+                <div className="tips">{this.state.passwordError}</div>
               </div>
 
               <div className="form-group register-password">
-                <input type="password" className="form-control" id="exampleInputPassword1" onBlur={checkConfirmPassword}
-                       placeholder="请确认密码"/>
-                <div id="confirmPassword" className=" tips"/>
+                <input type="password" className="form-control" id="exampleInputPassword1"
+                       onBlur={this._checkConfirmPassword.bind(this)}
+                       onInput={this._onConfirmPasswordChange.bind(this)} placeholder="请确认密码"/>
+                <div className="tips">{this.state.confirmPasswordError}</div>
               </div>
-              <button type="submit" className="btn btn-primary btn-block btn-register">注册</button>
+              <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
+                      className="btn btn-primary btn-block btn-register">注册
+              </button>
             </form>
           </div>
           <div className="col-md-4"></div>
@@ -54,16 +64,82 @@ export default class Register extends Component {
     )
   }
 
-  _onUsernameChange(event) {
+  _checkUsername(event) {
+    var username = event.target.value;
+    if (checkUsername(username)) {
+      this.setState({usernameError: ''});
+    } else {
+      this.setState({usernameError: '用户名格式错误！'});
+    }
+  }
+
+  _checkPassword(event) {
+    const password = event.target.value;
+    if (checkPassword(password)) {
+      this.setState({passwordError: ''});
+    } else {
+      this.setState({passwordError: '密码格式错误！'})
+    }
+  }
+
+  _checkConfirmPassword(event) {
+    const confirmPassword = event.target.value;
+    if (checkConfirmPassword(confirmPassword)) {
+      this.setState({confirmPasswordError: ''});
+    } else {
+      this.setState({confirmPasswordError: '两次密码输入不一致！'})
+    }
+  }
+
+  // _onUsernameChanged(event) {
+  //   const username = event.target.value;
+  //   this.setState({
+  //     username: username,
+  //     usernameError: ''
+  //   });
+  //   setTimeout(()=> {
+  //     this._determineIfEnableSubmitButton();
+  //   });
+  // }
+
+  _onUsernameChanged(event) {
+    const username = event.target.value;
     this.setState({
-      username: event.target.value
-    })
+      username: username,
+      usernameError: ''
+    });
+    setTimeout(()=> {
+      this._determineIfEnableSubmitButton();
+    });
   }
 
   _onPasswordChange(event) {
+    const password = event.target.value;
     this.setState({
-      password: event.target.value
-    })
+      password: password,
+      passwordError: ''
+    });
+    setTimeout(()=> {
+      this._determineIfEnableSubmitButton();
+    });
+  }
+
+  _onConfirmPasswordChange(event) {
+    const confirmPassword = event.target.value;
+    this.setState({
+      confirmPassword: confirmPassword,
+      confirmPasswordError: ''
+    });
+    setTimeout(()=> {
+      this._determineIfEnableSubmitButton();
+    });
+  }
+
+  _determineIfEnableSubmitButton() {
+    const canSubmit = checkUsername(this.state.username) && checkPassword(this.state.password);
+    this.setState({
+      submitButtonEnabled: canSubmit
+    });
   }
 
   _onSubmit(event) {
@@ -78,13 +154,15 @@ export default class Register extends Component {
         if (err) return console.error(err);
         if (res === 201) {
           alert("注册成功！");
-          <Link to="main"/>
+
         }
         if (res === 400) {
           alert("用户名或密码不正确！");
+          return;
         }
         if (res === 409) {
           alert("用户名已存在！");
+          return;
         }
 
       })

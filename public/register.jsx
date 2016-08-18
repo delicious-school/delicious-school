@@ -69,7 +69,7 @@ export default class Register extends Component {
       .end((err,res) => {
 
         if(err) return console.error(err);
-        //这里是前端处理
+        //这里是前端处理  res：stateCode
         alert(res);
       })
   }

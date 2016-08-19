@@ -33,16 +33,17 @@ export default class Register extends Component {
             <img className="img-responsive center-block picture-head" src="./img/name1.png"/>
             <form onSubmit={this._onSubmit.bind(this)}>
               <div className="form-group register-user">
-                <input type="text" className="form-control" id="username" onBlur={this._checkUsername.bind(this)}
+                <input type="text" className="form-control" id="username"
+                       onBlur={this._checkUsername.bind(this)}
                        placeholder="请输入8位学号"
-                       value={this.state.username}
                        onChange={this._onUsernameChanged.bind(this)}/>
                 <div className="tips">{this.state.usernameError}</div>
               </div>
 
               <div className="form-group register-password">
-                <input type="password" className="form-control" id="password" onBlur={this._checkPassword.bind(this)}
-                       placeholder="请输入密码(6-10位)" value={this.state.password}
+                <input type="password" className="form-control" id="password"
+                       onBlur={this._checkPassword.bind(this)}
+                       placeholder="请输入密码(6-10位)"
                        onChange={this._onPasswordChange.bind(this)}/>
                 <div className="tips">{this.state.passwordError}</div>
               </div>
@@ -50,7 +51,8 @@ export default class Register extends Component {
               <div className="form-group register-password">
                 <input type="password" className="form-control" id="exampleInputPassword1"
                        onBlur={this._checkConfirmPassword.bind(this)}
-                       onChange={this._onConfirmPasswordChange.bind(this)} placeholder="请确认密码"/>
+                       onChange={this._onConfirmPasswordChange.bind(this)}
+                       placeholder="请确认密码"/>
                 <div className="tips">{this.state.confirmPasswordError}</div>
               </div>
               <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
@@ -116,7 +118,8 @@ export default class Register extends Component {
   }
 
   _determineIfEnableSubmitButton() {
-    const canSubmit = checkUsername(this.state.username) && checkPassword(this.state.password);
+    const canSubmit = checkUsername(this.state.username)
+      && checkPassword(this.state.password) && checkConfirmPassword(this.state.exampleInputPassword1);
     this.setState({
       submitButtonEnabled: canSubmit
     });

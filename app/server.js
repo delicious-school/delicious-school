@@ -38,12 +38,6 @@ app.post('/saveOrder', execute.saveOrder);
 
 app.use('/api', apiRouter);
 
-// db.connect();
-
-// app.listen(3000, function () {
-//   console.log('Listening on 3000');
-// });
-
 if (require.main === module) {
    app.listen(3000, function () {
       db.connect((err) => {

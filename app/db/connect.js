@@ -1,11 +1,14 @@
 let mongoose = require("mongoose");
 
 module.exports = {
-  connect: function () {
-    mongoose.Promise = global.Promise;
-    mongoose.connect('mongodb://localhost/delicious-school-db');
+  connect: function (mode, callback) {
+    let url = 'mongodb://localhost/delicious-school-db';
+    if (mode === 'test') {
+      url = 'mongodb://localhost/delicious-school-mongodb-spec';
+    }
+    mongoose.connect(url, callback);
   },
-  close: function () {
-    mongoose.close();
+  close: function (callback) {
+    mongoose.connection.close(callback);
   }
 };

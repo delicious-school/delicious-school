@@ -1,8 +1,4 @@
-/**
- * Created by xjy on 8/19/16.
- */
 "use strict";
-
 function validateLogin(user) {
   if (user.username === undefined || user.password === undefined) {
     return false;

@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import {Link} from 'react-router';
+import {checkPassword, checkUsername} from './register-validate';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      username: '',
+      password: '',
+      exampleInputPassword1: '',
+      usernameError: '',
+      passwordError: '',
+      submitButtonEnabled: false
+    }
   }
 
   commit() {
@@ -41,20 +50,75 @@ export default class Login extends Component {
             <h1 className="login-head">Delicious School</h1>
             <form>
               <div className="form-group login-user">
-                <input type="text" className="form-control" id="username" placeholder="请输入8位学号"/>
+                <input type="text" className="form-control" id="username"
+                       placeholder="请输入8位学号"
+                       onBlur={this._checkUsername.bind(this)}
+                       onChange={this._onUsernameChanged.bind(this)}/>
+                <div className="tips">{this.state.usernameError}</div>
               </div>
 
               <div className="form-group login-password">
-                <input type="password" className="form-control" id="password" placeholder="请输入密码(6-16位)"/>
+                <input type="password" className="form-control" id="password"
+                       placeholder="请输入密码(6-16位)"
+                       onBlur={this._checkPassword.bind(this)}
+                       onChange={this._onPasswordChange.bind(this)}/>
+                <div className="tips">{this.state.passwordError}</div>
               </div>
             </form>
-            <button type="button" onClick={this.commit} className="btn btn-primary btn-block btn-login">登录</button>
+            <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
+                    className="btn btn-primary btn-block btn-register">登录
+            </button>
           </div>
           <div className="col-md-4"></div>
         </div>
       </div>
     )
   }
+
+
+  _checkUsername(event) {
+    var username = event.target.value;
+    if (checkUsername(username)) {
+      this.setState({usernameError: ''});
+    } else {
+      this.setState({usernameError: '用户名格式错误！'});
+    }
+  }
+
+  _onUsernameChanged(event) {
+    const username = event.target.value;
+    this.setState({
+      username: username,
+      usernameError: ''
+    }, () => this._determineIfEnableSubmitButton());
+  }
+
+  _checkPassword(event) {
+    const password = event.target.value;
+    if (checkPassword(password)) {
+      this.setState({passwordError: ''});
+    } else {
+      this.setState({passwordError: '密码格式错误！'})
+    }
+  }
+
+  _onPasswordChange(event) {
+    const password = event.target.value;
+    this.setState({
+      password: password,
+      passwordError: ''
+    }, () => this._determineIfEnableSubmitButton());
+  }
+
+  _determineIfEnableSubmitButton() {
+    const canSubmit = checkUsername(this.state.username)
+      && checkPassword(this.state.password);
+    this.setState({
+      submitButtonEnabled: canSubmit
+    });
+  }
+
+
 }
 
 

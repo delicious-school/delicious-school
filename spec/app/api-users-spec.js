@@ -21,6 +21,7 @@ describe('测试user-api', () => {
   it('测试输入正确的用户名（8位数字）和密码（6-10位）', (done) => {
     async.waterfall([
       (cb) => request(app).post('/api/users').send({username: '12345678', password: '123456'}).expect(201, cb),
+
       (res, cb) => User.find(cb),
       (users, cb) => {
         expect(users.length).toEqual(1);

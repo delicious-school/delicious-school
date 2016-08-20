@@ -147,7 +147,6 @@ export default class Register extends Component {
         if (res.statusCode === 201) {
           alert("注册成功！");
           return hashHistory.push('/main');
-          // self.location = "/#/main";
         }
       });
   }

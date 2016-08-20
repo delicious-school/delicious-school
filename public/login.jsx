@@ -9,8 +9,6 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      usernameError: '',
-      passwordError: '',
       submitButtonEnabled: false
     }
   }
@@ -51,17 +49,13 @@ export default class Login extends Component {
               <div className="form-group login-user">
                 <input type="text" className="form-control" id="username"
                        placeholder="请输入8位学号"
-                       onBlur={this._checkUsername.bind(this)}
                        onChange={this._onUsernameChanged.bind(this)}/>
-                <div className="tips">{this.state.usernameError}</div>
               </div>
 
               <div className="form-group login-password">
                 <input type="password" className="form-control" id="password"
                        placeholder="请输入密码(6-10位)"
-                       onBlur={this._checkPassword.bind(this)}
                        onChange={this._onPasswordChange.bind(this)}/>
-                <div className="tips">{this.state.passwordError}</div>
               </div>
             </form>
             <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
@@ -74,16 +68,6 @@ export default class Login extends Component {
     )
   }
 
-
-  _checkUsername(event) {
-    var username = event.target.value;
-    if (checkUsername(username)) {
-      this.setState({usernameError: ''});
-    } else {
-      this.setState({usernameError: '用户名不能为空！'});
-    }
-  }
-
   _onUsernameChanged(event) {
     const username = event.target.value;
     this.setState({
@@ -91,16 +75,7 @@ export default class Login extends Component {
       usernameError: ''
     }, () => this._determineIfEnableSubmitButton());
   }
-
-  _checkPassword(event) {
-    const password = event.target.value;
-    if (checkPassword(password)) {
-      this.setState({passwordError: ''});
-    } else {
-      this.setState({passwordError: '密码不能为空！'})
-    }
-  }
-
+  
   _onPasswordChange(event) {
     const password = event.target.value;
     this.setState({

@@ -1,5 +1,5 @@
 "use strict";
-let validateLogin = require("../../share/validate-login");
+let validateLogin = require("../../../app/api/login/validate-login");
 fdescribe("验证用户名，密码是否为空或该属性不存在", ()=> {
   it("用户名为空，返回false", ()=> {
     let user = {

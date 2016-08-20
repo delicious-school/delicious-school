@@ -41,7 +41,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash": "^4.15.0",
-    "mongoose": "^4.5.8",
+    "mongoose": "^4.5.9",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "react-router": "^2.6.1",

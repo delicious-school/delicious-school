@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import request from 'superagent';
-import {checkPassword, checkUsername} from './login-validate';
+import {checkUsernameAndPassword} from './login-validate';
 
 export default class Login extends Component {
   constructor(props) {
@@ -12,25 +12,6 @@ export default class Login extends Component {
       submitButtonEnabled: false
     }
   }
-
-  // commit() {
-  //   let username = $("#username").val();
-  //   let password = $("#password").val();
-  //   $.ajax({
-  //     url: '/login',
-  //     type: 'POST',
-  //     async: true,
-  //     data: {username: username, password: password},
-  //     success: function (result) {
-  //       if (result) {
-  //         self.location = "/#/main";
-  //       } else {
-  //         alert("用户名或密码错误！");
-  //         location.href = "/#/login";
-  //       }
-  //     }
-  //   })
-  // }
 
   render() {
     return (
@@ -83,8 +64,8 @@ export default class Login extends Component {
   }
 
   _determineIfEnableSubmitButton() {
-    const canSubmit = checkUsername(this.state.username)
-      && checkPassword(this.state.password);
+    const canSubmit = checkUsernameAndPassword(this.state.username)
+      && checkUsernameAndPassword(this.state.password);
     this.setState({
       submitButtonEnabled: canSubmit
     });
@@ -92,7 +73,7 @@ export default class Login extends Component {
 
   _onSubmit(event) {
     event.preventDefault();
-    request.post('/api/session')
+    request.post('/api/sessions')
       .send({
         username: this.state.username,
         password: this.state.password

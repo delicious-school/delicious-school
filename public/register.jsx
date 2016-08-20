@@ -85,7 +85,7 @@ export default class Register extends Component {
 
   _checkConfirmPassword(event) {
     const confirmPassword = event.target.value;
-    if (checkConfirmPassword(confirmPassword)) {
+    if (checkConfirmPassword(this.state.password,confirmPassword)) {
       this.setState({confirmPasswordError: ''});
     } else {
       this.setState({confirmPasswordError: '两次密码输入不一致！'})

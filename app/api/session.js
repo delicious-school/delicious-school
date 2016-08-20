@@ -1,5 +1,4 @@
 import express from 'express';
-import User from '../db/entity/user';
 import isExistUser from './login/is-exist-user';
 
 const router = express.Router();

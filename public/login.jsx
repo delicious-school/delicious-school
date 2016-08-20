@@ -89,6 +89,4 @@ export default class Login extends Component {
       submitButtonEnabled: canSubmit
     });
   }
-
-
 }

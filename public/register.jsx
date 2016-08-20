@@ -133,20 +133,19 @@ export default class Register extends Component {
         password: this.state.password
       })
       .end((err, res) => {
-
-        if (err) return console.error(err);
-        if (res === 201) {
+        if (res.statusCode === 201) {
           alert("注册成功！");
-
+          self.location = "/#/main";
         }
-        if (res === 400) {
+        if (res.statusCode === 400) {
           alert("用户名或密码不正确！");
           return;
         }
-        if (res === 409) {
+        if (res.statusCode === 409) {
           alert("用户名已存在！");
           return;
         }
+        if (err) return console.error(err);
       });
   }
 }

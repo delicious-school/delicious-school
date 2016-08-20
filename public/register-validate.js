@@ -25,7 +25,6 @@ function checkConfirmPassword() {
   return true;
 }
 
-
 module.exports = {
     checkUsername: checkUsername,
   checkPassword: checkPassword,

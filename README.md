@@ -17,6 +17,7 @@ All the changes to js/jsx files can be hot-reloaded in browser.
 npm install -g babel-cli
 npm install
 npm start
+
 ```
 
 Then visit <http://localhost:3000>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import $ from 'jquery';
 import {Link} from 'react-router';
-import {checkPassword, checkUsername} from './register-validate';
+import {checkPassword, checkUsername} from './login-validate';
 
 export default class Login extends Component {
   constructor(props) {
@@ -9,7 +9,6 @@ export default class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      exampleInputPassword1: '',
       usernameError: '',
       passwordError: '',
       submitButtonEnabled: false
@@ -59,7 +58,7 @@ export default class Login extends Component {
 
               <div className="form-group login-password">
                 <input type="password" className="form-control" id="password"
-                       placeholder="请输入密码(6-16位)"
+                       placeholder="请输入密码(6-10位)"
                        onBlur={this._checkPassword.bind(this)}
                        onChange={this._onPasswordChange.bind(this)}/>
                 <div className="tips">{this.state.passwordError}</div>
@@ -81,7 +80,7 @@ export default class Login extends Component {
     if (checkUsername(username)) {
       this.setState({usernameError: ''});
     } else {
-      this.setState({usernameError: '用户名格式错误！'});
+      this.setState({usernameError: '用户名不能为空！'});
     }
   }
 
@@ -98,7 +97,7 @@ export default class Login extends Component {
     if (checkPassword(password)) {
       this.setState({passwordError: ''});
     } else {
-      this.setState({passwordError: '密码格式错误！'})
+      this.setState({passwordError: '密码不能为空！'})
     }
   }
 

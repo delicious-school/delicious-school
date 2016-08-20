@@ -1,18 +1,29 @@
 function checkUsername() {
   let username = document.getElementById("username").value;
-  let patternUsername = /^\d{8}$/;
-  let checkUsername = patternUsername.test(username);
-  if (!checkUsername) {
+  if (username !== '') {
+    return true
+  }
+}
+
+function checkPassword() {
+  let password = document.getElementById("password").value;
+  if (password !== '') {
+    return true
+  }
+}
+
+function checkConfirmPassword() {
+  let password = document.getElementById("password").value;
+  let passwordConfirm = document.getElementById("exampleInputPassword1").value;
+  if (password !== passwordConfirm) {
     return false;
   }
   return true;
 }
 
-function checkPassword() {
-
-}
 
 module.exports = {
-  checkPassword,
-  checkUsername
-}
+  checkUsername: checkUsername,
+  checkPassword: checkPassword,
+  checkConfirmPassword: checkConfirmPassword
+};

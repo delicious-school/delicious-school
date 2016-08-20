@@ -1,8 +1,8 @@
-import User from '../db/entity/user';
+import User from '../../db/entity/user';
 
 
-function isExistUsername(username, callback) {
-  User.findOne({username}, function (err, user) {
+function isExistUsername(user, callback) {
+  User.findOne({user}, function (err, user) {
     if (err) return callback(err);
     if (user) {
       callback(null, true);
@@ -10,7 +10,6 @@ function isExistUsername(username, callback) {
       callback(null, false);
     }
   })
-
 }
 
 export default isExistUsername;

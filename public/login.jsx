@@ -44,7 +44,7 @@ export default class Login extends Component {
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4 login-page">
-            <h1 className="login-head">Delicious School</h1>
+            <img className="img-responsive center-block picture-head" src="./img/name1.png"/>
             <form>
               <div className="form-group login-user">
                 <input type="text" className="form-control" id="username"
@@ -72,15 +72,13 @@ export default class Login extends Component {
     const username = event.target.value;
     this.setState({
       username: username,
-      usernameError: ''
     }, () => this._determineIfEnableSubmitButton());
   }
-  
+
   _onPasswordChange(event) {
     const password = event.target.value;
     this.setState({
       password: password,
-      passwordError: ''
     }, () => this._determineIfEnableSubmitButton());
   }
 

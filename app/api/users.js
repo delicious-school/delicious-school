@@ -12,9 +12,9 @@ router.post('/', function (req, res, next) {
   };
   const isValidate = validate(requestUser);
   if (isValidate) {
-    findOneUser(requestUser.username, function (err, state) {
+    findOneUser(requestUser.username, function (err, exists) {
       if (err) return next(err);
-      if (state) {
+      if (exists) {
         return res.sendStatus(409);
       }
       const newUser = new User(requestUser);

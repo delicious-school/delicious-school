@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import {hashHistory} from 'react-router';
 import request from 'superagent';
 import {checkUsernameAndPassword} from './login-validate';
 
@@ -79,19 +80,21 @@ export default class Login extends Component {
         password: this.state.password
       })
       .end((err, res) => {
+        if (err) {
+          if (res.statusCode === 400) {
+            alert("用户名或密码不能为空！");
+            return
+          } else if (res.statusCode === 401) {
+            alert("用户名或密码错误！");
+            return;
+          } else {
+            return alert(err);
+          }
+        }
         if (res.statusCode === 201) {
           alert("登录成功！");
-          self.location = "/#/main";
+          return hashHistory.push('/main');
         }
-        if (res.statusCode === 400) {
-          alert("用户名或密码不能为空！");
-          return;
-        }
-        if (res.statusCode === 401) {
-          alert("用户名或密码错误！");
-          return;
-        }
-        if (err) return console.error(err);
       });
   }
 }

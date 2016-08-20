@@ -1,6 +1,6 @@
 import express from 'express';
 import usersApi from './users';
-import sessionApi from './session';
+import sessionApi from './sessions';
 
 const router = express.Router();
 

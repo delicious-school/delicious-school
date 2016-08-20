@@ -11,9 +11,9 @@ router.post('/', function (req, res, next) {
   };
   const isValidate = validateLogin(requestUser);
   if (isValidate) {
-    isExistUser(requestUser, function (err, state) {
+    isExistUser(requestUser, function (err, exists) {
       if (err) return next(err);
-      if (state) {
+      if (exists) {
         return res.sendStatus(201);
       }
       return res.sendStatus(401);

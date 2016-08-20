@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import {Link} from 'react-router';
-import {checkPassword, checkUsername} from './login-validate';
+import {hashHistory} from 'react-router';
+import request from 'superagent';
+import {checkUsernameAndPassword} from './login-validate';
 
 export default class Login extends Component {
   constructor(props) {
@@ -11,25 +12,6 @@ export default class Login extends Component {
       password: '',
       submitButtonEnabled: false
     }
-  }
-
-  commit() {
-    let username = $("#username").val();
-    let password = $("#password").val();
-    $.ajax({
-      url: '/login',
-      type: 'POST',
-      async: true,
-      data: {username: username, password: password},
-      success: function (result) {
-        if (result) {
-          self.location = "/#/main";
-        } else {
-          alert("用户名或密码错误！");
-          location.href = "/#/login";
-        }
-      }
-    })
   }
 
   render() {
@@ -45,7 +27,7 @@ export default class Login extends Component {
           <div className="col-md-4"></div>
           <div className="col-md-4 login-page">
             <img className="img-responsive center-block picture-head" src="./img/name1.png"/>
-            <form>
+            <form onSubmit={this._onSubmit.bind(this)}>
               <div className="form-group login-user">
                 <input type="text" className="form-control" id="username"
                        placeholder="请输入8位学号"
@@ -57,10 +39,10 @@ export default class Login extends Component {
                        placeholder="请输入密码(6-10位)"
                        onChange={this._onPasswordChange.bind(this)}/>
               </div>
+              <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
+                      className="btn btn-primary btn-block btn-register">登录
+              </button>
             </form>
-            <button id="btn-check" type="submit" disabled={this.state.submitButtonEnabled ? '' : 'disabled'}
-                    className="btn btn-primary btn-block btn-register">登录
-            </button>
           </div>
           <div className="col-md-4"></div>
         </div>
@@ -83,10 +65,36 @@ export default class Login extends Component {
   }
 
   _determineIfEnableSubmitButton() {
-    const canSubmit = checkUsername(this.state.username)
-      && checkPassword(this.state.password);
+    const canSubmit = checkUsernameAndPassword(this.state.username)
+      && checkUsernameAndPassword(this.state.password);
     this.setState({
       submitButtonEnabled: canSubmit
     });
+  }
+
+  _onSubmit(event) {
+    event.preventDefault();
+    request.post('/api/sessions')
+      .send({
+        username: this.state.username,
+        password: this.state.password
+      })
+      .end((err, res) => {
+        if (err) {
+          if (res.statusCode === 400) {
+            alert("用户名或密码不能为空！");
+            return
+          } else if (res.statusCode === 401) {
+            alert("用户名或密码错误！");
+            return;
+          } else {
+            return alert(err);
+          }
+        }
+        if (res.statusCode === 201) {
+          alert("登录成功！");
+          return hashHistory.push('/main');
+        }
+      });
   }
 }

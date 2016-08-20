@@ -1,8 +1,9 @@
 import express from 'express';
 import User from '../db/entity/user';
 import validate from '../../share/validate';
+import findOneUser from './register/find-one-user';
+import saveUser from './register/saveUser';
 const router = express.Router();
-
 
 router.post('/', function (req, res, next) {
   const requestUser = {
@@ -11,13 +12,13 @@ router.post('/', function (req, res, next) {
   };
   const isValidate = validate(requestUser);
   if (isValidate) {
-    User.findOne({username: requestUser.username}, function (err, users) {
+    findOneUser(requestUser.username, function (err, exists) {
       if (err) return next(err);
-      if (users) {
+      if (exists) {
         return res.sendStatus(409);
       }
-      const user = new User(requestUser);
-      user.save(function (err) {
+      const newUser = new User(requestUser);
+      saveUser(newUser, function (err) {
         if (err) return next(err);
         return res.sendStatus(201);
       });

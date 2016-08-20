@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import {Link} from 'react-router';
+import {hashHistory} from 'react-router';
 import request from 'superagent';
 import {checkUsername, checkPassword, checkConfirmPassword} from './register-validate';
 
@@ -86,7 +86,7 @@ export default class Register extends Component {
 
   _checkConfirmPassword(event) {
     const confirmPassword = event.target.value;
-    if (checkConfirmPassword(confirmPassword)) {
+    if (checkConfirmPassword(this.state.password, confirmPassword)) {
       this.setState({confirmPasswordError: ''});
     } else {
       this.setState({confirmPasswordError: '两次密码输入不一致！'})
@@ -119,7 +119,7 @@ export default class Register extends Component {
 
   _determineIfEnableSubmitButton() {
     const canSubmit = checkUsername(this.state.username)
-      && checkPassword(this.state.password) && checkConfirmPassword(this.state.exampleInputPassword1);
+      && checkPassword(this.state.password) && checkConfirmPassword(this.state.password,this.state.confirmPassword);
     this.setState({
       submitButtonEnabled: canSubmit
     });
@@ -133,19 +133,20 @@ export default class Register extends Component {
         password: this.state.password
       })
       .end((err, res) => {
-
-        if (err) return console.error(err);
-        if (res === 201) {
+        if (err) {
+          if (res.statusCode === 400) {
+            alert("用户名或密码不正确！");
+            return;
+          } else if (res.statusCode === 409) {
+            alert("用户名已存在！");
+            return;
+          } else {
+            return alert(err);
+          }
+        }
+        if (res.statusCode === 201) {
           alert("注册成功！");
-
-        }
-        if (res === 400) {
-          alert("用户名或密码不正确！");
-          return;
-        }
-        if (res === 409) {
-          alert("用户名已存在！");
-          return;
+          return hashHistory.push('/main');
         }
       });
   }

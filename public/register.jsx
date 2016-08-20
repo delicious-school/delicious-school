@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import $ from 'jquery';
 import {Link} from 'react-router';
 import request from 'superagent';
 import {checkUsername, checkPassword, checkConfirmPassword} from './register-validate';

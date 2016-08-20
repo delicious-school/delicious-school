@@ -10,7 +10,6 @@ router.post('/', function (req, res, next) {
     username: req.body.username,
     password: req.body.password
   };
-
   const isValidate = validate(requestUser);
   if (isValidate) {
     findOneUser(requestUser.username, function (err, state) {

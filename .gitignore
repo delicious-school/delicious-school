@@ -1,5 +1,3 @@
 node_modules/
 public/bundle.js
-.idea
-spec/app/login-async-spec.js
-spec/app/register-async-spec.js
+.idea/

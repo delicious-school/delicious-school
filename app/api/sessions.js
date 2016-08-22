@@ -1,7 +1,7 @@
 import express from 'express';
 import isExistUser from './login/is-exist-user';
 import validateLogin from './login/validate-login';
-
+import {generateToken} from './main/cookie-tool';
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -14,6 +14,7 @@ router.post('/', function (req, res, next) {
     isExistUser(requestUser, function (err, exists) {
       if (err) return next(err);
       if (exists) {
+        res.cookie('token', generateToken(requestUser.username,requestUser.password));
         return res.sendStatus(201);
       }
       return res.sendStatus(401);

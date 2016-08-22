@@ -1,3 +1,4 @@
+/*eslint node/no-unpublished-require: "off"*/
 const webpack = require('webpack');
 
 module.exports = {

@@ -8,9 +8,9 @@ import express from 'express';
 import execute from './db/execute';
 import apiRouter from './api/index';
 
-let db = require('./db/connect');
+const db = require('./db/connect');
 
-let bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -40,12 +40,12 @@ app.post('/saveOrder', execute.saveOrder);
 app.use('/api', apiRouter);
 
 if (require.main === module) {
-   app.listen(3000, function () {
-      db.connect((err) => {
-       if (err) return console.error('db connection failed');
-        console.log('Listening on 3000');
-      });
+  app.listen(3000, function () {
+    db.connect((err) => {
+      if (err) return console.error('db connection failed');
+      console.log('Listening on 3000');
     });
-  }
+  });
+}
 export default app;
 

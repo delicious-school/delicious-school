@@ -1,10 +1,10 @@
 function checkUsername(username) {
-  let patternUsername = /^\d{8}$/;
+  const patternUsername = /^\d{8}$/;
   return patternUsername.test(username);
 }
 
 function checkPassword(password) {
-  return password.length <= 10 && password.length >= 6
+  return password.length <= 10 && password.length >= 6;
 }
 
 function checkConfirmPassword(password,confirmPassword) {

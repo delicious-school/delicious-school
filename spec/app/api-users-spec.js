@@ -70,7 +70,7 @@ describe('测试user-api', () => {
 
   it('测试用户名已存在', (done) => {
     async.waterfall([
-      (cb) => new User({username: "12345678", password: "123456"}).save((err, data) => cb(err, data)),
+      (cb) => new User({username: '12345678', password: '123456'}).save((err, data) => cb(err, data)),
       (user, cb) => request(app).post('/api/users').send({username: '12345678', password: '123456'}).expect(409, cb),
     ], finish(done));
   });

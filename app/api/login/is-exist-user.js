@@ -8,7 +8,7 @@ function isExistUsername(user, callback) {
     } else {
       callback(null, false);
     }
-  })
+  });
 }
 
 export default isExistUsername;

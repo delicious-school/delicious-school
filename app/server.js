@@ -41,7 +41,7 @@ app.use('/api', apiRouter);
 
 if (require.main === module) {
   app.listen(3000, function () {
-    db.connect((err) => {
+    db.connect('production', (err) => {
       if (err) return console.error('db connection failed');
       console.log('Listening on 3000');
     });

@@ -30,3 +30,10 @@
     overflow: hidden;
     width: 33.3%;
 }
+
+.dishprice {
+    font-size: large;
+    color: red;
+    margin-left: 50px;
+    display: inline-block;
+}

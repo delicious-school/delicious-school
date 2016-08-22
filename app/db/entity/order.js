@@ -1,8 +1,8 @@
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-let Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-let orderSchema = new Schema({
+const orderSchema = new Schema({
   username: String,
   dishstore: String,
   dishname: String,
@@ -12,6 +12,6 @@ let orderSchema = new Schema({
 });
 
 // the collection's name is `orders`
-let Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;

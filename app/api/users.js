@@ -2,7 +2,7 @@ import express from 'express';
 import User from '../db/entity/user';
 import validate from '../../share/validate';
 import findOneUser from './register/find-one-user';
-import saveUser from './register/saveUser';
+import saveUser from './register/save-user';
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
         if (err) return next(err);
         return res.sendStatus(201);
       });
-    })
+    });
   } else {
     return res.sendStatus(400);
   }

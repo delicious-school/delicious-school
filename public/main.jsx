@@ -11,7 +11,6 @@ export default class Main extends Component {
     };
     this.initData();
     this.dishView = this.dishView.bind(this);
-
   }
 
   render() {
@@ -30,8 +29,9 @@ export default class Main extends Component {
     const dishesRows = this.state.dishes.map(dish=>
       <div className="float-left-picture">
         <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
-             src="./img/4.jpg"/>
-        <h4 onClick={this.dishView(dish._id)}>{dish.dishname}</h4>
+             src={dish.dishpicture}/>
+        <h4 onClick={this.dishView(dish._id)}>{dish.dishname}<span className="dishprice">¥{dish.dishprice}</span>
+        </h4>
       </div>
     );
 

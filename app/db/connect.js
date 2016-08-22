@@ -1,4 +1,4 @@
-let mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 module.exports = {
   connect: function (mode, callback) {

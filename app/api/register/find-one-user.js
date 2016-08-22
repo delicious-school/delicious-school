@@ -8,7 +8,7 @@ function findOneUser(username, callback) {
     } else {
       callback(null, false);
     }
-  })
+  });
 }
 
 export default findOneUser;

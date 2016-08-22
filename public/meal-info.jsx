@@ -16,6 +16,7 @@ export default class MealInfo extends Component {
   render() {
     const dishname = this.state.mealInfo.dishname,
       dishprice = this.state.mealInfo.dishprice,
+      dishpicture = this.state.mealInfo.dishpicture,
       dishstore = this.state.mealInfo.dishstore;
 
     return (
@@ -30,7 +31,7 @@ export default class MealInfo extends Component {
         <div>
           <div className="row body-margin">
             <div className="col-md-4">
-              <img className="img-responsive center-block" src="./img/4.jpg"/>
+              <img className="img-responsive center-block" src={dishpicture}/>
             </div>
             <div className="col-md-8">
               <h1>{dishname}</h1>

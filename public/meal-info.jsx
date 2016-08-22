@@ -1,14 +1,17 @@
+import $ from 'jquery';
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import $ from 'jquery';
-let count = 1;
+import {hashHistory} from 'react-router';
+import request from 'superagent';
+
 
 export default class MealInfo extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      mealInfo: 'mei you cai!',
+      mealInfo: '',
+      count:1
     };
     this.dishInformation();
   }
@@ -37,10 +40,11 @@ export default class MealInfo extends Component {
               <h1>{dishname}</h1>
               <h2 className="price-color">¥{dishprice}</h2>
               店名：{dishstore}<br/>
+              联系店家：
               <h4>
-                <button onClick={this.addCount(-1)}>-</button>
-                <span className="count">{count}</span>
-                <button onClick={this.addCount(1)}>+</button>
+                <button onChange={this._subCount.bind(this)}>-</button>
+                <span className="count">{this.state.count}</span>
+                <button onClick={this._addCount.bind(this)}>+</button>
               </h4>
               <button onClick={this.myOrder(dishname, dishprice, dishstore, this.state.count)} type="button"
                       className="btn btn-primary btn-meal-info">预订
@@ -53,6 +57,26 @@ export default class MealInfo extends Component {
     );
   }
 
+  _subCount(){
+    console.log('[[[[[[[[[[[[[[[[[');
+    const oldCount =this.state.count;
+    console.log(oldCount+']]]]]]]]]]]]]]]]]]]]]]]]]]]]');
+    if(oldCount>1){
+      console.log('[[[[[[[[[[[[[[[[[');
+      this.setState=({
+        count: oldCount-1
+      });
+    }
+  }
+
+  _addCount(){
+    const oldCount =this.state.count;
+    this.setState = ({
+      count:oldCount+1
+    })
+  }
+
+
   dishInformation() {
     const self = this;
     const url = location.href;
@@ -60,7 +84,6 @@ export default class MealInfo extends Component {
     $.post('/mealInfo', {id: id}, function (mealInfo) {
       self.setState({
         mealInfo: mealInfo,
-        // count:1
       });
     });
   }
@@ -72,7 +95,6 @@ export default class MealInfo extends Component {
         count = 1;
       }
       $('.count').html(count);
-      // this.setState.count=count;
     }
   }
 

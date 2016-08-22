@@ -19,26 +19,6 @@ describe('测试login-api', () => {
     db.close(finish(done));
   });
 
-  it('测试输入用户名存在和密码正确', (done) => {
-    async.waterfall([
-      (cb) => new User({username: '12345678', password: '123456'}).save((err, data) => cb(err, data)),
-      (user, cb) => request(app).post('/api/sessions').send({username: '12345678', password: '123456'}).expect(201, cb),
-    ], finish(done));
-  });
-
-  it('测试用户名在数据库中不存在', (done) => {
-    async.waterfall([
-      (cb) => request(app).post('/api/sessions').send({username: '12345678', password: '123456'}).expect(401, cb),
-    ], finish(done));
-  });
-
-  it('测试用户名在数据库中存在， 密码错误', (done) => {
-    async.waterfall([
-      (cb) => new User({username: '12345678', password: '123456'}).save((err, data) => cb(err, data)),
-      (user, cb) => request(app).post('/api/sessions').send({username: '12345678', password: '123457'}).expect(401, cb),
-    ], finish(done));
-  });
-
   it('测试用户名不为空，密码为空', (done) => {
     async.waterfall([
       (cb) => request(app).post('/api/sessions').send({username: '12345972', password: ''}).expect(400, cb),
@@ -50,6 +30,7 @@ describe('测试login-api', () => {
       (cb) => request(app).post('/api/sessions').send({username: '', password: '123456'}).expect(400, cb),
     ], finish(done));
   });
+
   it('测试用户名为空，密码为空', (done)=> {
     async.waterfall([
       (cb) => request(app).post('/api/sessions').send({username: '', password: ''}).expect(400, cb),
@@ -73,5 +54,4 @@ describe('测试login-api', () => {
       (cb) => request(app).post('/api/sessions').expect(400, cb),
     ], finish(done));
   });
-
 });

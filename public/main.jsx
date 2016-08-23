@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import $ from 'jquery';
 import request from 'superagent';
+import {hashHistory} from 'react-router';
+
 
 export default class Main extends Component {
   constructor(props) {
@@ -39,10 +41,9 @@ export default class Main extends Component {
     return (
       <div className="container-fluid">
         <div className="main-head">
-          <Link to="#" className="logo">Delicious School</Link>
-          <Link to="register" className="main-top">注册</Link>
+          <Link to="main" className="logo">Delicious School</Link>
           <Link to="order" className="main-top">我的订单</Link>
-          <Link to="login" className="main-top">欢迎{this.state.username}</Link>
+          <span className="main-top">欢迎{this.state.username}</span>
         </div>
 
         <div id="myCarousel" className="carousel slide">
@@ -78,7 +79,6 @@ export default class Main extends Component {
           </div>
         </div>
       </div>
-
     );
   }
 
@@ -87,13 +87,11 @@ export default class Main extends Component {
     request.post('/api/mainpage')
       .end((err,res) =>{
         const {username,dishes} = res.body;
-
         if (err) return alert(err);
         self.setState({
           dishes:dishes,
           username:username
         });
-
       });
   }
 

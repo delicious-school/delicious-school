@@ -1,6 +1,7 @@
 import express from 'express';
 import Dish from '../db/entity/dish';
 import {getUsernameFromToken, validateToken} from './main/cookie-tool';
+
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
@@ -14,8 +15,8 @@ router.post('/', function (req, res, next) {
       } else {
         res.send(false);
       }
-    })
-  })
+    });
+  });
 });
-  export default router;
+export default router;
 

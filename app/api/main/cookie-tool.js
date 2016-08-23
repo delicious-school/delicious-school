@@ -42,6 +42,6 @@ function findUser(username, callback) {
     } else {
       callback(null, false);
     }
-  })
+  });
 }
 module.exports = {getUsernameFromToken,validateToken,generateToken};

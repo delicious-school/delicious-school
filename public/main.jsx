@@ -43,7 +43,7 @@ export default class Main extends Component {
     return (
       <div className="container-fluid">
         <div className="main-head">
-          <Link to="#" className="logo">Delicious School</Link>
+          <Link to="main" className="logo">Delicious School</Link>
           <Link to="register" className="main-top">注册</Link>
           <Link to="order" className="main-top">我的订单</Link>
           <Link to="login" className="main-top">欢迎{this.state.username}</Link>

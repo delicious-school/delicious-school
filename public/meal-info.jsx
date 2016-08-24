@@ -45,7 +45,6 @@ export default class MealInfo extends Component {
               <button onClick={this.myOrder(dishname, dishprice, dishstore, this.state.count)} type="button"
                       className="btn btn-primary btn-meal-info">预订
               </button>
-              <button onClick={this.myOrder(dishname, dishprice, dishstore, this.state.count)}>预定</button>
             </div>
           </div>
         </div>

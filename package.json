@@ -4,6 +4,7 @@
   "description": "Delicious School =================",
   "main": "index.js",
   "scripts": {
+    "init-db":"babel-node setup/init-db.js",
     "pretest": "mongod --fork --logpath /dev/null",
     "posttest": "mongo admin --eval 'db.shutdownServer()' > /dev/null",
     "start": "babel-node app/server.js --ignore 'node_modules/' || exit 0",

@@ -33,7 +33,6 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static('./public'));
-app.post('/mealInfo', execute.finsDishInfoById);
 app.post('/saveOrder', execute.saveOrder);
 
 app.use('/api', apiRouter);

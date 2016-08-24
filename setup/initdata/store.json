@@ -1,0 +1,20 @@
+[
+  {
+    "storename": "1号店",
+    "storelocation": "旭日苑一号窗口",
+    "storephone": "188-2929-0000",
+    "status":0
+  },
+  {
+    "storename": "2号店",
+    "storelocation": "旭日苑二号窗口",
+    "storephone": "188-2929-0001",
+    "status":0
+  },
+  {
+    "storename": "3号店",
+    "storelocation": "旭日苑三号窗口",
+    "storephone": "188-2929-0002",
+    "status":0
+  }
+]

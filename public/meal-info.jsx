@@ -4,9 +4,7 @@ import {Link} from 'react-router';
 import request from 'superagent';
 import {hashHistory} from 'react-router';
 
-
 export default class MealInfo extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -90,27 +88,6 @@ export default class MealInfo extends Component {
       });
   }
 
-  myOrder(dishname, dishprice, storename, storephone, storelocation, count) {
-    return ()=> {
-      const dishOrder = {
-        username: '',
-        dishname: dishname,
-        dishprice: dishprice,
-        dishstore: storename,
-        dishescount: count,
-        storephone: storephone,
-        storelocation: storelocation
-      };
-      $.post('/saveOrder', dishOrder, function (result) {
-        if (result) {
-          alert('预定成功！');
-          hashHistory.push('/main');
-        } else {
-          alert('预定失败,服务器忙,请稍后重试。')
-        }
-      })
-    }
-  }
 
   getCookie(){
     const self = this;

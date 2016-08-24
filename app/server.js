@@ -33,15 +33,13 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static('./public'));
-//app.post('/login', execute.findUser);
-//app.post('/init', execute.findDish);
 app.post('/mealInfo', execute.finsDishInfoById);
 app.post('/saveOrder', execute.saveOrder);
 
 app.use('/api', apiRouter);
 
 if (require.main === module) {
-  app.listen(3003, function () {
+  app.listen(3000, function () {
     db.connect('production', (err) => {
       if (err) return console.error('db connection failed');
       console.log('Listening on 3000');

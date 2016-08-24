@@ -9,7 +9,6 @@ const router = express.Router();
 router.post('/', function (req, res, next) {
   const token = req.cookies['token'];
   validateToken(token, function (err, flag) {
-    console.log(flag+'2222222222222222222')
     if (err) throw next(err);
     if (flag) {
       const username = getUsernameFromToken(token);
@@ -19,6 +18,5 @@ router.post('/', function (req, res, next) {
     }
   })
 });
-
 export default router;
 

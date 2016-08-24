@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import $ from 'jquery';
 import request from 'superagent';
 
 export default class Main extends Component {
@@ -8,12 +7,17 @@ export default class Main extends Component {
     super(props);
     this.state = {
       dishes: [],
-      username:''
+      username:'',
+      storeOfDishes:[]
     };
+  }
+  componentWillMount(){
     this.initData();
+    this.initStoreOfDishes();
+    this.getCookie();
+    this.showStoreOfDishes = this.showStoreOfDishes.bind(this);
     this.dishView = this.dishView.bind(this);
   }
-
   render() {
     const stores = this.state.dishes.reduce((result, {dishstore})=> {
       let found = result.find((item)=>item === dishstore);
@@ -24,10 +28,10 @@ export default class Main extends Component {
     }, []);
 
     const storesRows = stores.map(item=>
-      <Link to="#" className="list-group-item store-list">{item}</Link>
+      <Link to="main" className="list-group-item store-list" >{item}</Link>
     );
 
-    const dishesRows = this.state.dishes.map(dish=>
+    const dishesRows = this.state.storeOfDishes.map(dish=>
       <div className="float-left-picture">
         <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
              src={dish.dishpicture}/>
@@ -70,7 +74,7 @@ export default class Main extends Component {
 
         <div className="row">
           <div className="col-md-3">
-            <h2 className="list-group-item store-list list-head">商家列表</h2>
+            <ul className="list-group-item store-list list-head">商家列表</ul>
             {storesRows}
           </div>
           <div className="col-md-9">
@@ -86,23 +90,57 @@ export default class Main extends Component {
     const self = this;
     request.post('/api/mainpage')
       .end((err,res) =>{
-        const {username,dishes} = res.body;
-
+        const {dishes} = res.body;
         if (err) return alert(err);
         self.setState({
-          dishes:dishes,
-          username:username
+          dishes:dishes
         });
 
       });
   }
+  getCookie(){
+    const self = this;
+    request.post('/api/cookie')
+      .end((err,res) =>{
+        const {username} = res.body;
+        if (err) return alert(err);
+        self.setState({
+          username:username
+        });
+      });
+  }
 
+  initStoreOfDishes(){
+    const  self = this;
+    request.post('/api/mainpage/storeOfDishes')
+      .send({dishstore:'1号店'})
+      .end((err,res) =>{
+        const {storeOfDishes} = res.body;
+        if (err) return alert(err);
+        self.setState({
+          storeOfDishes:storeOfDishes
+        });
+
+      })
+  }
+  showStoreOfDishes(dishstore){
+    const  self = this;
+    request.post('/api/mainpage/storeOfDishes')
+      .send({dishstore:dishstore})
+      .end((err,res) =>{
+        const {storeOfDishes} = res.body;
+        if (err) return alert(err);
+        if(res.statusCode === 200){
+          self.setState({
+            storeOfDishes:storeOfDishes
+          });
+        }
+      })
+
+  }
   dishView(id) {
     return ()=> {
       self.location = "/#/meal-info/?id=" + id;
     }
   }
 }
-
-
-

@@ -4,18 +4,25 @@ import {getUsernameFromToken, validateToken} from './main/cookie-tool';
 const router = express.Router();
 
 router.post('/', function (req, res, next) {
-  const token = req.cookies['token'];
   Dish.find({}, function (err, dishes) {
     if (err) throw next(err);
-    validateToken(token, function (err, flag) {
-      if (flag && dishes) {
-        const username = getUsernameFromToken(token);
-        res.send({dishes, username});
+      if (dishes) {
+        res.send({dishes});
       } else {
         res.send(false);
       }
     })
-  })
+});
+
+router.post('/storeOfDishes',function (req,res,next) {
+  const {dishstore} = req.body;
+  Dish.find({dishstore:dishstore},function (err,storeOfDishes) {
+    if (err) return next(err)
+    if(storeOfDishes){
+      return res.send({storeOfDishes});
+    }
+      return res.send(false);
+  });
 });
   export default router;
 

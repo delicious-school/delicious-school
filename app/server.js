@@ -41,7 +41,7 @@ app.post('/saveOrder', execute.saveOrder);
 app.use('/api', apiRouter);
 
 if (require.main === module) {
-  app.listen(3000, function () {
+  app.listen(3003, function () {
     db.connect('production', (err) => {
       if (err) return console.error('db connection failed');
       console.log('Listening on 3000');

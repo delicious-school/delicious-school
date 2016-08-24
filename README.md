@@ -32,6 +32,10 @@ Run eslint
 npm run lint
 ```
 
-
+how init db
+-----------------
+```
+npm run init-db
+```
 
 

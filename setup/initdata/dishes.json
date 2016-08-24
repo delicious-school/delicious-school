@@ -1,0 +1,104 @@
+[
+  {
+    "dishname": "虾仁西兰花",
+    "dishprice": "12",
+    "dishstore": "1号店",
+    "dishpicture": "./img/1.jpg"
+  },
+  {
+    "dishname": "茴香豆",
+    "dishprice": "5",
+    "dishstore": "1号店",
+    "dishpicture": "./img/2.jpg"
+  },
+  {
+    "dishname": "腊肉萝卜干炒毛豆子",
+    "dishprice": "12",
+    "dishstore": "1号店",
+    "dishpicture": "./img/4.jpg"
+  },
+  {
+    "dishname": "西葫芦虾皮煎饼",
+    "dishprice": "8",
+    "dishstore": "1号店",
+    "dishpicture": "./img/5.jpg"
+  },
+  {
+    "dishname": "香煎萝卜糕",
+    "dishprice": "7",
+    "dishstore": "1号店",
+    "dishpicture": "./img/4.jpg"
+  },
+  {
+    "dishname": "凉拌金针菇",
+    "dishprice": "10",
+    "dishstore": "1号店",
+    "dishpicture": "./img/3.jpg"
+  },
+  {
+    "dishname": "兰州牛肉拉面",
+    "dishprice": "7",
+    "dishstore": "2号店",
+    "dishpicture": "./img/2.jpg"
+  },
+  {
+    "dishname": "椰奶冻魔方",
+    "dishprice": "7",
+    "dishstore": "2号店",
+    "dishpicture": "./img/2.jpg"
+  },
+  {
+    "dishname": "鱼肉酿青椒",
+    "dishprice": "10",
+    "dishstore": "2号店",
+    "dishpicture": "./img/3.jpg"
+  },
+  {
+    "dishname": "茄汁鸡肉",
+    "dishprice": "9",
+    "dishstore": "2号店",
+    "dishpicture": "./img/1.jpg"
+  },
+  {
+    "dishname": "芒果布丁",
+    "dishprice": "8",
+    "dishstore": "1号店",
+    "dishpicture": "./img/3.jpg"
+  },
+  {
+    "dishname": "蔬菜水晶冻",
+    "dishprice": "11",
+    "dishstore": "2号店",
+    "dishpicture": "./img/4.jpg"
+  },
+  {
+    "dishname": "爽口鳕鱼粥",
+    "dishprice": "7",
+    "dishstore": "2号店",
+    "dishpicture": "./img/5.jpg"
+  },
+  {
+    "dishname": "儿菜炒腊肠",
+    "dishprice": "7",
+    "dishstore": "2号店",
+    "dishpicture": "./img/3.jpg"
+  },
+  {
+    "dishname": "芝麻糖包",
+    "dishprice": "8",
+    "dishstore": "3号店",
+    "dishpicture": "./img/2.jpg"
+  },
+  {
+    "dishname": "猪心炒姜丝",
+    "dishprice": "14",
+    "dishstore": "3号店",
+    "dishpicture": "./img/1.jpg"
+  },
+  {
+    "dishname": "虾仔排骨面",
+    "dishprice": "9",
+    "dishstore": "3号店",
+    "dishpicture": "./img/4.jpg"
+  }
+]

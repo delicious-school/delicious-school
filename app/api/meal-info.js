@@ -13,4 +13,16 @@ router.post('/', function (req, res, next) {
     }
   });
 });
+
+router.get('/', function (req, res, next) {
+  const  id = req.query.id;
+  Dish.findOne({_id:id},function (err,mealInfo) {
+    if (err) throw next(err);
+    if(mealInfo){
+      res.send(mealInfo);
+    }else {
+      res.send(false);
+    }
+  });
+});
 export default router;

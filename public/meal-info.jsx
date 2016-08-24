@@ -15,7 +15,11 @@ export default class MealInfo extends Component {
       userName: '',
       storeInfo: {}
     };
-    this.dishInformation();
+  }
+  componentWillMount(){
+    this.getUsername();
+    this.getDishInformation();
+    this.getStore();
   }
 
   render() {
@@ -27,7 +31,7 @@ export default class MealInfo extends Component {
         <div className="main-head">
           <Link to="main" className="logo">Delicious School</Link>
           <Link to="order" className="main-top">我的订单</Link>
-          <span className="main-top">欢迎{this.state.username}</span>
+          <span className="main-top">欢迎{this.state.userName}</span>
         </div>
 
         <div>
@@ -72,25 +76,23 @@ export default class MealInfo extends Component {
     });
   }
 
-  dishInformation() {
-    // const self = this;
+  getDishInformation() {
     const url = location.href;
     let id = url.split('=')[1].split('&')[0];
 
     request.post('/api/mealInfo')
       .send({id: id})
       .end((err, res)=> {
-        const {userName, mealInfo, storeInfo} = res.body;
+        const  mealInfo = res.body;
         if (err) return alert(err);
         this.setState({
           mealInfo: mealInfo,
-          userName: userName,
-          storeInfo: storeInfo
+          // storeInfo: storeInfo
         });
       });
   }
 
-  myOrder(dishname, dishprice, storename, storephone, storelocation,count) {
+  myOrder(dishname, dishprice, storename, storephone, storelocation, count) {
     return ()=> {
       const dishOrder = {
         username: '',
@@ -98,18 +100,42 @@ export default class MealInfo extends Component {
         dishprice: dishprice,
         dishstore: storename,
         dishescount: count,
-        storephone:storephone,
-        storelocation:storelocation
+        storephone: storephone,
+        storelocation: storelocation
       };
       $.post('/saveOrder', dishOrder, function (result) {
         if (result) {
-          alert('预定成功！')
+          alert('预定成功！');
           hashHistory.push('/main');
         } else {
           alert('预定失败,服务器忙,请稍后重试。')
         }
       })
     }
+  }
+
+  getUsername(){
+    request.post('/api/cookieusername')
+      .end((err,res) =>{
+        if (err) return alert(err);
+        const username = res.body;
+        this.setState({
+          userName:username
+        });
+      });
+  }
+
+  getStore(){
+    // request.post('/api/stores')
+    //   .send({storename:this.state.mealInfo.dishstore})
+    //   .end((err,res)=>{
+    //     if(err) return alert(err);
+    //     const storeInfo = res.body;
+    //     this.setState({
+    //       storeInfo:storeInfo
+    //     });
+    //     alert(storeInfo.storename + '           000000000');
+    //   });
   }
 }
 

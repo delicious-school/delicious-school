@@ -12,6 +12,8 @@ function getUsernameFromToken(token) {
   return token.substring(0, separatorIndex);
 }
 
+
+
 function validateToken(token,callback) {
   if (token === null || token.length === 0 || !token.includes(':')) {
     return false;
@@ -26,13 +28,7 @@ function validateToken(token,callback) {
       }
     });
   }
-
 }
-
-
-
-
-
 
 function findUser(username, callback) {
   User.findOne({username}, function (err, user) {
@@ -44,4 +40,6 @@ function findUser(username, callback) {
     }
   });
 }
-module.exports = {getUsernameFromToken,validateToken,generateToken};
+
+export  {getUsernameFromToken,validateToken,generateToken};
+// module.exports = {getUsernameFromToken,validateToken,generateToken};

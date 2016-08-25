@@ -4,8 +4,9 @@ import App from './app.jsx';
 import Main from './main.jsx';
 import MealInfo from './meal-info.jsx';
 
-import Initdash from  './initdash.jsx';
-import Dish from  './dish.jsx';
+import One from  './one.jsx';
+import Two from  './two.jsx';
+import Three from  './three.jsx';
 
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import React from 'react';
@@ -19,18 +20,16 @@ require('./style/register.css');
 require('./style/meal-info.css');
 require('./style/order.css');
 
-
-
-
 const router = <Router history={hashHistory}>
   <Route path='/' component={App}>
     <IndexRoute component={Login}/>
     <Route path='login' component={Login}/>
     <Route path='register' component={Register}/>
     <Route path='main' component={Main}>
-      <IndexRoute component={Initdash}/>
-      <Route path='initdash' component={Initdash}/>
-      <Route path="dish/:dishname" component={Dish} />
+      <IndexRoute component={One}/>
+      <Route path='one' component={One}/>
+      <Route path="two" component={Two} />
+      <Route path="three" component={Three} />
       </Route>
     <Route path='meal-info(/:id)' component={MealInfo}/>
   </Route>

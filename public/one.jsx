@@ -2,14 +2,16 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import request from 'superagent';
 
-export default class Dish extends Component {
+export default class One extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      storeOfDishes:[]
+         storeOfDishes:[]
     };
   }
   componentWillMount(){
+
+    {/*componentWillMount*/}
     this.initStoreOfDishes();
     this.dishView = this.dishView.bind(this);
   }
@@ -25,15 +27,14 @@ export default class Dish extends Component {
 
     return (
       <div className="col-md-9">
-        {dishesRows}
-      </div>
+            {dishesRows}
+          </div>
     );
   }
 
   initStoreOfDishes(){
     const  self = this;
-    console.log(this.props.params.dishname);
-    request.get(`/api/mainpage/storeOfDishes/${this.props.params.dishname}`)
+    request.get('/api/mainpage/storeOfDishes/1号店')
       .end((err,res) =>{
         const {storeOfDishes} = res.body;
         if (err) return alert(err);

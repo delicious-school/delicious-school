@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import request from 'superagent';
 
-export default class Main extends Component {
+export default class Two extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +15,7 @@ export default class Main extends Component {
   }
   render() {
     const dishesRows = this.state.storeOfDishes.map(dish=>
-      <div className="float-left-picture">
+      <div key={dish._id} className="float-left-picture">
         <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
              src={dish.dishpicture}/>
         <h4 onClick={this.dishView(dish._id)}>{dish.dishname}<span className="dishprice">¥{dish.dishprice}</span>
@@ -32,7 +32,7 @@ export default class Main extends Component {
 
   initStoreOfDishes(){
     const  self = this;
-    request.get('/api/mainpage/storeOfDishes/'+'3号店')
+    request.get('/api/mainpage/storeOfDishes/2号店')
       .end((err,res) =>{
         const {storeOfDishes} = res.body;
         if (err) return alert(err);

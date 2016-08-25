@@ -10,8 +10,6 @@ export default class One extends Component {
     };
   }
   componentWillMount(){
-
-    {/*componentWillMount*/}
     this.initStoreOfDishes();
     this.dishView = this.dishView.bind(this);
   }

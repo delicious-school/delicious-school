@@ -21,7 +21,6 @@ export default class Login extends Component {
           <Link to="main" className="logo">Delicious School</Link>
           <Link to="#" className="main-top">登录</Link>
           <Link to="register" className="main-top">注册</Link>
-          <Link to="order" className="main-top">我的订单</Link>
         </div>
         <div className="row">
           <div className="col-md-4"></div>

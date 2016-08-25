@@ -4,9 +4,8 @@ import App from './app.jsx';
 import Main from './main.jsx';
 import MealInfo from './meal-info.jsx';
 
-import One from  './test-one.jsx';
-import Two from  './test-two.jsx';
-import Three from  './test-three.jsx';
+import Initdash from  './initdash.jsx';
+import Dish from  './dish.jsx';
 
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import React from 'react';
@@ -29,10 +28,9 @@ const router = <Router history={hashHistory}>
     <Route path='login' component={Login}/>
     <Route path='register' component={Register}/>
     <Route path='main' component={Main}>
-      <IndexRoute component={One}/>
-      <Route path='one' component={One}/>
-      <Route path='two' component={Two}/>
-      <Route path='three' component={Three}/>
+      <IndexRoute component={Initdash}/>
+      <Route path='initdash' component={Initdash}/>
+      <Route path="dish/:dishname" component={Dish} />
       </Route>
     <Route path='meal-info(/:id)' component={MealInfo}/>
   </Route>

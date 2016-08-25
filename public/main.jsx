@@ -24,9 +24,10 @@ export default class Main extends Component {
       }
       return result;
     }, []);
-    const storeRow1 = <Link to="/main/one" className="list-group-item store-list">{stores[0]}</Link>
-    const storeRow2 = <Link to="/main/two" className="list-group-item store-list">{stores[1]}</Link>
-    const storeRow3 = <Link to="/main/three" className="list-group-item store-list">{stores[2]}</Link>
+
+    const storesRows = stores.map(item =>
+       <Link key={item} to={"/main/two/" + item} className="list-group-item store-list">{item}</Link>
+    );
 
     return (
       <div className="container-fluid">
@@ -60,9 +61,7 @@ export default class Main extends Component {
         <div className="row">
           <div className="col-md-3">
             <ul className="list-group-item store-list list-head">商家列表</ul>
-            {storeRow1}
-            {storeRow2}
-            {storeRow3}
+            {storesRows}
           </div>
           {this.props.children}
         </div>
@@ -70,6 +69,7 @@ export default class Main extends Component {
 
     );
   }
+
   initData() {
     const self = this;
     request.post('/api/mainpage')
@@ -82,6 +82,7 @@ export default class Main extends Component {
 
       });
   }
+
   getCookie() {
     const self = this;
     request.post('/api/cookie')

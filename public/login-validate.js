@@ -1,6 +1,5 @@
-
 function checkUsernameAndPassword(userInfomation) {
-  return  userInfomation !== '';
+  return userInfomation !== '';
 }
 
 module.exports = {

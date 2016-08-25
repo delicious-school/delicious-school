@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/', function (req, res, next) {
   const token = req.cookies['token'];
   validateToken(token, function (err, flag) {
-    if (err) return  next(err);
+    if (err) return next(err);
     if (flag) {
       const username = getUsernameFromToken(token);
       res.send({username});

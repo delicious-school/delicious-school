@@ -6,7 +6,6 @@ import MealInfo from './meal-info.jsx';
 
 import One from  './one.jsx';
 import Two from  './two.jsx';
-import Three from  './three.jsx';
 
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import React from 'react';
@@ -28,9 +27,8 @@ const router = <Router history={hashHistory}>
     <Route path='main' component={Main}>
       <IndexRoute component={One}/>
       <Route path='one' component={One}/>
-      <Route path="two" component={Two} />
-      <Route path="three" component={Three} />
-      </Route>
+      <Route path="two/:dishname" component={Two}/>
+    </Route>
     <Route path='meal-info(/:id)' component={MealInfo}/>
   </Route>
 </Router>;

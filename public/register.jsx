@@ -118,7 +118,7 @@ export default class Register extends Component {
 
   _determineIfEnableSubmitButton() {
     const canSubmit = checkUsername(this.state.username)
-      && checkPassword(this.state.password) && checkConfirmPassword(this.state.password,this.state.confirmPassword);
+      && checkPassword(this.state.password) && checkConfirmPassword(this.state.password, this.state.confirmPassword);
     this.setState({
       submitButtonEnabled: canSubmit
     });

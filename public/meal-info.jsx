@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import request from 'superagent';
@@ -11,7 +12,8 @@ export default class MealInfo extends Component {
       count: 1,
       username: '',
       totalPrice: 0,
-      storeInfo: {}
+      storeInfo: {},
+      peopleStatus: ''
     };
   }
 
@@ -48,8 +50,15 @@ export default class MealInfo extends Component {
                 <button onClick={this._addCount.bind(this)}>+</button>
               </h4>
               <div>总计：{this.state.totalPrice}</div>
-              <div>您前面还有{status}道菜</div>
-              <button onClick={this.saveStoreState.bind(this)} type="button" className="btn btn-primary btn-meal-info">预订</button>
+              <div>您前面还有&nbsp;{status}&nbsp;道菜</div>
+
+              <div>
+                点击预订后即可查看当前排队人数&nbsp;&nbsp;
+                <span>{this.state.peopleStatus}</span>
+              </div>
+              <button onClick={this.saveStoreState.bind(this)} type="button" className="btn btn-primary btn-meal-info">
+                预订
+              </button>
             </div>
           </div>
         </div>
@@ -73,6 +82,18 @@ export default class MealInfo extends Component {
     });
   }
 
+  getCookie() {
+    const self = this;
+    request.post('/api/cookie')
+      .end((err, res) => {
+        const {username} = res.body;
+        if (err) return alert(err);
+        self.setState({
+          username: username
+        });
+      });
+  }
+
   getDishInformation() {
     const url = location.href;
     let id = url.split('=')[1].split('&')[0];
@@ -83,21 +104,8 @@ export default class MealInfo extends Component {
         if (err) return alert(err);
         this.setState({
           mealInfo: mealInfo
-        },() =>{
+        }, ()=> {
           this.getStore();
-        });
-      });
-  }
-
-
-  getCookie(){
-    const self = this;
-    request.post('/api/cookie')
-      .end((err, res) => {
-        const {username} = res.body;
-        if (err) return alert(err);
-        self.setState({
-          username: username
         });
       });
   }
@@ -114,12 +122,34 @@ export default class MealInfo extends Component {
       });
   }
 
-  saveStoreState(){
+  saveStoreState() {
     request.post('/api/stores/update-status')
-      .send({_id: this.state.storeInfo._id, status: this.state.storeInfo.status})
+      .send({
+        storeInfo: this.state.storeInfo,
+      })
       .end((err, res)=> {
         if (err) return alert(err);
-        alert('预定成功！');
+        if (res) {
+          alert('预定成功！');
+          this.getPeopleState();
+        }
+      });
+  }
+
+  getPeopleState() {
+    request.post('/api/stores/people-status')
+      .send({
+        username: this.state.username,
+        mealInfo: this.state.mealInfo,
+        storeInfo: this.state.storeInfo,
+        count: this.state.count,
+        totalPrice: this.state.totalPrice
+      })
+      .end((err, res)=> {
+        if (err) return alert(err);
+        this.setState({
+          peopleStatus: res.body - 1
+        });
       });
   }
 }

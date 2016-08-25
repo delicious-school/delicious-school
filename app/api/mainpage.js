@@ -13,11 +13,11 @@ router.post('/', function (req, res, next) {
   });
 });
 
-router.get('/storeOfDishes/:dishstore',function (req,res,next) {
+router.get('/storeOfDishes/:dishstore', function (req, res, next) {
   const dishstore = req.params.dishstore;
-  Dish.find({dishstore:dishstore},function (err,storeOfDishes) {
+  Dish.find({dishstore: dishstore}, function (err, storeOfDishes) {
     if (err) return next(err);
-    if(storeOfDishes){
+    if (storeOfDishes) {
       return res.send({storeOfDishes});
     }
     return res.send(false);

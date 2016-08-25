@@ -14,7 +14,7 @@ router.post('/', function (req, res, next) {
     isExistUser(requestUser, function (err, exists) {
       if (err) return next(err);
       if (exists) {
-        res.cookie('token', generateToken(requestUser.username,requestUser.password));
+        res.cookie('token', generateToken(requestUser.username, requestUser.password));
         return res.sendStatus(201);
       }
       return res.sendStatus(401);

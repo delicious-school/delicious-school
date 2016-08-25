@@ -10,10 +10,11 @@ export default class Dish extends Component {
     };
   }
   componentWillMount(){
-    this.initStoreOfDishes();
     this.dishView = this.dishView.bind(this);
   }
+
   render() {
+    this.initStoreOfDishes();
     const dishesRows = this.state.storeOfDishes.map(dish=>
       <div key={dish._id} className="float-left-picture">
         <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
@@ -31,13 +32,12 @@ export default class Dish extends Component {
   }
 
   initStoreOfDishes(){
-    const  self = this;
     console.log(this.props.params.dishname);
     request.get(`/api/mainpage/storeOfDishes/${this.props.params.dishname}`)
       .end((err,res) =>{
         const {storeOfDishes} = res.body;
         if (err) return alert(err);
-        self.setState({
+        this.setState({
           storeOfDishes:storeOfDishes
         });
 

@@ -29,10 +29,6 @@ export default class Main extends Component {
       <Link key={item} to={"/main/dish/" + item} className="list-group-item store-list">{item}</Link>
     );
 
-    // const storeRow1 = <Link to="/main/one" className="list-group-item store-list">{stores[0]}</Link>
-    // const storeRow2 = <Link to="/main/two" className="list-group-item store-list">{stores[1]}</Link>
-    // const storeRow3 = <Link to="/main/three" className="list-group-item store-list">{stores[2]}</Link>
-
     return (
       <div className="container-fluid">
         <div className="main-head">

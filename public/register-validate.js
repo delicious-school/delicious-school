@@ -7,7 +7,7 @@ function checkPassword(password) {
   return password.length <= 10 && password.length >= 6;
 }
 
-function checkConfirmPassword(password,confirmPassword) {
+function checkConfirmPassword(password, confirmPassword) {
   return password === confirmPassword;
 }
 

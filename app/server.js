@@ -1,11 +1,9 @@
-/*eslint no-console: "off"*/
 import webpack from 'webpack';
 import webpackConfig from '../webpack.config';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import express from 'express';
 import cookieParser from 'cookie-parser';
-import execute from './db/execute';
 import apiRouter from './api/index';
 
 const db = require('./db/connect');
@@ -33,7 +31,6 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 app.use(express.static('./public'));
-app.post('/saveOrder', execute.saveOrder);
 
 app.use('/api', apiRouter);
 

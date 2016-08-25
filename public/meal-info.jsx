@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import request from 'superagent';
@@ -9,8 +10,10 @@ export default class MealInfo extends Component {
     this.state = {
       mealInfo: {},
       count: 1,
-      userName: '',
-      storeInfo: {}
+      username: '',
+      totalPrice: 0,
+      storeInfo: {},
+      peopleStatus: ''
     };
   }
 
@@ -21,14 +24,13 @@ export default class MealInfo extends Component {
 
   render() {
     const {dishname, dishprice, dishpicture}= this.state.mealInfo;
-    const {storename, storephone, storelocation}=this.state.storeInfo;
-
+    const {storename, storephone, storelocation, status}=this.state.storeInfo;
+    this.state.totalPrice = dishprice * this.state.count;
     return (
       <div className="container-fluid">
         <div className="main-head">
           <Link to="main" className="logo">Delicious School</Link>
-          <Link to="order" className="main-top">我的订单</Link>
-          <span className="main-top">欢迎{this.state.userName}</span>
+          <span className="main-top">欢迎{this.state.username}</span>
         </div>
 
         <div>
@@ -47,7 +49,16 @@ export default class MealInfo extends Component {
                 <span>{this.state.count}</span>
                 <button onClick={this._addCount.bind(this)}>+</button>
               </h4>
-              <button type="button" className="btn btn-primary btn-meal-info">预订</button>
+              <div>总计：{this.state.totalPrice}</div>
+              <div>您前面还有&nbsp;{status}&nbsp;道菜</div>
+
+              <div>
+                点击预订后即可查看当前排队人数&nbsp;&nbsp;
+                <span>{this.state.peopleStatus}</span>
+              </div>
+              <button onClick={this.saveStoreState.bind(this)} type="button" className="btn btn-primary btn-meal-info">
+                预订
+              </button>
             </div>
           </div>
         </div>
@@ -58,29 +69,17 @@ export default class MealInfo extends Component {
   _subCount() {
     if (this.state.count > 1) {
       this.setState({
-        count: this.state.count - 1
+        count: this.state.count - 1,
+        totalPrice: this.state.count * this.state.totalPrice
       });
     }
   }
 
   _addCount() {
     this.setState({
-      count: this.state.count + 1
+      count: this.state.count + 1,
+      totalPrice: this.state.count * this.state.totalPrice
     });
-  }
-
-  getDishInformation() {
-    const url = location.href;
-    let id = url.split('=')[1].split('&')[0];
-    request.post('/api/mealInfo')
-      .send({id: id})
-      .end((err, res)=> {
-        const mealInfo = res.body;
-        if (err) return alert(err);
-        this.setState({
-          mealInfo: mealInfo,
-        });
-      });
   }
 
   getCookie() {
@@ -91,6 +90,65 @@ export default class MealInfo extends Component {
         if (err) return alert(err);
         self.setState({
           username: username
+        });
+      });
+  }
+
+  getDishInformation() {
+    const url = location.href;
+    let id = url.split('=')[1].split('&')[0];
+
+    request.get('/api/meal-info/', {id})
+      .end((err, res)=> {
+        const mealInfo = res.body;
+        if (err) return alert(err);
+        this.setState({
+          mealInfo: mealInfo
+        }, ()=> {
+          this.getStore();
+        });
+      });
+  }
+
+  getStore() {
+    request.post('/api/stores')
+      .send({storename: this.state.mealInfo.dishstore})
+      .end((err, res)=> {
+        if (err) return alert(err);
+        const storeInfo = res.body;
+        this.setState({
+          storeInfo: storeInfo
+        });
+      });
+  }
+
+  saveStoreState() {
+    request.post('/api/stores/update-status')
+      .send({
+        storeInfo: this.state.storeInfo,
+      })
+      .end((err, res)=> {
+        if (err) return alert(err);
+        if (res) {
+          alert('预定成功！');
+          this.getPeopleState();
+        }
+      });
+  }
+
+  getPeopleState() {
+    request.post('/api/stores/people-status')
+      .send({
+        username: this.state.username,
+        mealInfo: this.state.mealInfo,
+        storeInfo: this.state.storeInfo,
+        count: this.state.count,
+        totalPrice: this.state.totalPrice
+      })
+      .end((err, res)=> {
+        if (err) return alert(err);
+        this.setState({
+          peopleStatus: res.body - 1
         });
       });
   }

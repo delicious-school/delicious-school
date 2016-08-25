@@ -25,7 +25,6 @@ export default class Register extends Component {
           <Link to="main" className="logo">Delicious School</Link>
           <Link to="login" className="main-top">登录</Link>
           <Link to="#" className="main-top">注册</Link>
-          <Link to="order" className="main-top">我的订单</Link>
         </div>
         <div className="row">
           <div className="col-md-4"></div>
@@ -119,7 +118,7 @@ export default class Register extends Component {
 
   _determineIfEnableSubmitButton() {
     const canSubmit = checkUsername(this.state.username)
-      && checkPassword(this.state.password) && checkConfirmPassword(this.state.password,this.state.confirmPassword);
+      && checkPassword(this.state.password) && checkConfirmPassword(this.state.password, this.state.confirmPassword);
     this.setState({
       submitButtonEnabled: canSubmit
     });
@@ -146,7 +145,7 @@ export default class Register extends Component {
         }
         if (res.statusCode === 201) {
           alert("注册成功！");
-          return hashHistory.push('/main');
+          return hashHistory.push('/login');
         }
       });
   }

@@ -1,5 +1,4 @@
-
-function saveUser(user,callback){
+function saveUser(user, callback) {
   user.save(callback);
 }
 

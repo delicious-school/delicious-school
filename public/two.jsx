@@ -6,14 +6,16 @@ export default class Two extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      storeOfDishes:[]
+      storeOfDishes: []
     };
   }
-  componentWillMount(){
-    this.initStoreOfDishes();
+
+  componentWillMount() {
     this.dishView = this.dishView.bind(this);
   }
+
   render() {
+    this.initStoreOfDishes();
     const dishesRows = this.state.storeOfDishes.map(dish=>
       <div key={dish._id} className="float-left-picture">
         <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
@@ -30,18 +32,19 @@ export default class Two extends Component {
     );
   }
 
-  initStoreOfDishes(){
-    const  self = this;
-    request.get('/api/mainpage/storeOfDishes/2号店')
-      .end((err,res) =>{
+  initStoreOfDishes() {
+    const self = this;
+    request.get(`/api/mainpage/storeOfDishes/${this.props.params.dishname}`)
+      .end((err, res) => {
         const {storeOfDishes} = res.body;
         if (err) return alert(err);
         self.setState({
-          storeOfDishes:storeOfDishes
+          storeOfDishes: storeOfDishes
         });
 
       })
   }
+
   dishView(id) {
     return ()=> {
       self.location = "/#/meal-info/?id=" + id;

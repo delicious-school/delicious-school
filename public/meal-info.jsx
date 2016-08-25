@@ -18,11 +18,10 @@ export default class MealInfo extends Component {
   componentWillMount() {
     this.getCookie();
     this.getDishInformation();
-    this.getStore();
   }
 
   render() {
-    const {dishname, dishprice, dishpicture,dishstore}= this.state.mealInfo;
+    const {dishname, dishprice, dishpicture}= this.state.mealInfo;
     const {storename, storephone, storelocation, status}=this.state.storeInfo;
     this.state.totalPrice = dishprice * this.state.count;
     return (
@@ -40,7 +39,7 @@ export default class MealInfo extends Component {
             <div className="col-md-8">
               <h1>{dishname}</h1>
               <h1 className="price-color">¥{dishprice}</h1>
-              <h4>店名：{dishstore}</h4>
+              <h4>店名：{storename}</h4>
               <h4>联系店家：{storephone}</h4>
               <h4>地址：{storelocation}</h4>
               <h4>
@@ -77,7 +76,6 @@ export default class MealInfo extends Component {
   getDishInformation() {
     const url = location.href;
     let id = url.split('=')[1].split('&')[0];
-    alert(id);
 
     request.get('/api/meal-info/', {id})
       .end((err, res)=> {
@@ -85,6 +83,8 @@ export default class MealInfo extends Component {
         if (err) return alert(err);
         this.setState({
           mealInfo: mealInfo
+        },() =>{
+          this.getStore();
         });
       });
   }
@@ -102,8 +102,6 @@ export default class MealInfo extends Component {
       });
   }
 
-
-
   getStore() {
     request.post('/api/stores')
       .send({storename: this.state.mealInfo.dishstore})
@@ -113,9 +111,9 @@ export default class MealInfo extends Component {
         this.setState({
           storeInfo: storeInfo
         });
-        alert(this.state.storeInfo.storename + '   ' + this.state.storeInfo.storephone + '  ' + this.state.storeInfo.storelocation);
       });
   }
+
   saveStoreState(){
     request.post('/api/stores/update-status')
       .send({_id: this.state.storeInfo._id, status: this.state.storeInfo.status})

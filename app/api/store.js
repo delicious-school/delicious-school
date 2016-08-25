@@ -4,9 +4,11 @@ const router = express.Router();
 
 router.post('/', function (req, res, next) {
   const  storename = req.body;
+  console.log(storename.storename);
   Store.findOne(storename,function (err,storeInfo) {
     if (err) throw next(err);
     if(storeInfo){
+      console.log('----------------storeInfo--------');
       res.send(storeInfo);
     }else {
       res.send(false);

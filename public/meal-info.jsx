@@ -11,7 +11,8 @@ export default class MealInfo extends Component {
       count: 1,
       username: '',
       totalPrice: 0,
-      storeInfo: {}
+      storeInfo: {},
+      peopleStatus:0
     };
   }
 
@@ -20,6 +21,12 @@ export default class MealInfo extends Component {
     this.getDishInformation();
     this.getStore();
   }
+
+  componentDidMount(){
+    this.getPeopleState();
+    // console.log('aaaaaaaaaaaaaaaaaa     '+this.state.mealInfo.dishname);
+  }
+
 
   render() {
     const {dishname, dishprice, dishpicture}= this.state.mealInfo;
@@ -49,8 +56,11 @@ export default class MealInfo extends Component {
                 <button onClick={this._addCount.bind(this)}>+</button>
               </h4>
               <div>总计：{this.state.totalPrice}</div>
-              <div>等待人数：{status}人</div>
-              <button onClick={this.saveStoreState.bind(this)} type="button" className="btn btn-primary btn-meal-info">预订</button>
+              <div>您前面还有&nbsp;{status}&nbsp;道菜</div>
+              <div>您前面还有&nbsp;{this.state.peopleStatus}&nbsp;个人</div>
+              <button onClick={this.saveStoreState.bind(this)} type="button" className="btn btn-primary btn-meal-info">
+                预订
+              </button>
             </div>
           </div>
         </div>
@@ -111,13 +121,38 @@ export default class MealInfo extends Component {
         });
       });
   }
-  saveStoreState(){
+
+  saveStoreState() {
     request.post('/api/stores/update-status')
-      .send({_id: this.state.storeInfo._id, status: this.state.storeInfo.status})
+      .send({
+        storeInfo: this.state.storeInfo,
+      })
       .end((err, res)=> {
-        console.log(res + '--------------------');
         if (err) return alert(err);
-        alert('预定成功！');
+        if(res) {
+          alert('预定成功！');
+        }
+      });
+  }
+
+  getPeopleState(){
+    request.post('/api/stores/people-status')
+      .send({
+        username: this.state.username,
+        mealInfo:this.state.mealInfo,
+        storeInfo:this.state.storeInfo,
+        count:this.state.count,
+        totalPrice:this.state.totalPrice
+      })
+      .end((err, res)=> {
+        if (err) return alert(err);
+        if(!res.body){
+          res.body=0;
+        }
+        this.setState({
+          peopleStatus:res.body
+        });
+        alert(res.body);
       });
   }
 }

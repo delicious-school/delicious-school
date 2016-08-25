@@ -7,17 +7,15 @@ export default class Main extends Component {
     super(props);
     this.state = {
       dishes: [],
-      username:'',
-      storeOfDishes:[]
+      username: '',
     };
   }
-  componentWillMount(){
+
+  componentWillMount() {
     this.initData();
-    this.initStoreOfDishes();
     this.getCookie();
-    this.showStoreOfDishes = this.showStoreOfDishes.bind(this);
-    this.dishView = this.dishView.bind(this);
   }
+
   render() {
     const stores = this.state.dishes.reduce((result, {dishstore})=> {
       let found = result.find((item)=>item === dishstore);
@@ -26,19 +24,9 @@ export default class Main extends Component {
       }
       return result;
     }, []);
-
-    const storesRows = stores.map(item=>
-      <Link to="main" className="list-group-item store-list" >{item}</Link>
-    );
-
-    const dishesRows = this.state.storeOfDishes.map(dish=>
-      <div className="float-left-picture">
-        <img onClick={this.dishView(dish._id)} className="img-responsive center-block picture-margin"
-             src={dish.dishpicture}/>
-        <h4 onClick={this.dishView(dish._id)}>{dish.dishname}<span className="dishprice">¥{dish.dishprice}</span>
-        </h4>
-      </div>
-    );
+    const storeRow1 = <Link to="/main/one" className="list-group-item store-list">{stores[0]}</Link>
+    const storeRow2 = <Link to="/main/two" className="list-group-item store-list">{stores[1]}</Link>
+    const storeRow3 = <Link to="/main/three" className="list-group-item store-list">{stores[2]}</Link>
 
     return (
       <div className="container-fluid">
@@ -73,72 +61,37 @@ export default class Main extends Component {
         <div className="row">
           <div className="col-md-3">
             <ul className="list-group-item store-list list-head">商家列表</ul>
-            {storesRows}
+            {storeRow1}
+            {storeRow2}
+            {storeRow3}
           </div>
-          <div className="col-md-9">
-            {dishesRows}
-          </div>
+          {this.props.children}
         </div>
       </div>
 
     );
   }
-
   initData() {
     const self = this;
     request.post('/api/mainpage')
-      .end((err,res) =>{
+      .end((err, res) => {
         const {dishes} = res.body;
         if (err) return alert(err);
         self.setState({
-          dishes:dishes
+          dishes: dishes
         });
 
       });
   }
-  getCookie(){
+  getCookie() {
     const self = this;
     request.post('/api/cookie')
-      .end((err,res) =>{
+      .end((err, res) => {
         const {username} = res.body;
         if (err) return alert(err);
         self.setState({
-          username:username
+          username: username
         });
       });
-  }
-
-  initStoreOfDishes(){
-    const  self = this;
-    request.post('/api/mainpage/storeOfDishes')
-      .send({dishstore:'1号店'})
-      .end((err,res) =>{
-        const {storeOfDishes} = res.body;
-        if (err) return alert(err);
-        self.setState({
-          storeOfDishes:storeOfDishes
-        });
-
-      })
-  }
-  showStoreOfDishes(dishstore){
-    const  self = this;
-    request.post('/api/mainpage/storeOfDishes')
-      .send({dishstore:dishstore})
-      .end((err,res) =>{
-        const {storeOfDishes} = res.body;
-        if (err) return alert(err);
-        if(res.statusCode === 200){
-          self.setState({
-            storeOfDishes:storeOfDishes
-          });
-        }
-      })
-
-  }
-  dishView(id) {
-    return ()=> {
-      self.location = "/#/meal-info/?id=" + id;
-    }
   }
 }

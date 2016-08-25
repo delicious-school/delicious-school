@@ -12,20 +12,19 @@ export default class MealInfo extends Component {
       username: '',
       totalPrice: 0,
       storeInfo: {},
-      peopleStatus:0
+      peopleStatus:''
     };
   }
 
   componentWillMount() {
     this.getCookie();
     this.getDishInformation();
-    this.getStore();
   }
 
-  componentDidMount(){
-    this.getPeopleState();
-    // console.log('aaaaaaaaaaaaaaaaaa     '+this.state.mealInfo.dishname);
-  }
+  // componentDidMount() {
+  //   this.getPeopleState();
+  //   // console.log('aaaaaaaaaaaaaaaaaa     '+this.state.mealInfo.dishname);
+  // }
 
 
   render() {
@@ -57,7 +56,11 @@ export default class MealInfo extends Component {
               </h4>
               <div>总计：{this.state.totalPrice}</div>
               <div>您前面还有&nbsp;{status}&nbsp;道菜</div>
-              <div>您前面还有&nbsp;{this.state.peopleStatus}&nbsp;个人</div>
+
+              <div>
+                点击预订后即可查看当前排队人数&nbsp;&nbsp;
+                <span>{this.state.peopleStatus}</span>
+              </div>
               <button onClick={this.saveStoreState.bind(this)} type="button" className="btn btn-primary btn-meal-info">
                 预订
               </button>
@@ -106,6 +109,8 @@ export default class MealInfo extends Component {
         if (err) return alert(err);
         this.setState({
           mealInfo: mealInfo
+        }, ()=> {
+          this.getStore();
         });
       });
   }
@@ -129,30 +134,27 @@ export default class MealInfo extends Component {
       })
       .end((err, res)=> {
         if (err) return alert(err);
-        if(res) {
+        if (res) {
           alert('预定成功！');
+          this.getPeopleState();
         }
       });
   }
 
-  getPeopleState(){
+  getPeopleState() {
     request.post('/api/stores/people-status')
       .send({
         username: this.state.username,
-        mealInfo:this.state.mealInfo,
-        storeInfo:this.state.storeInfo,
-        count:this.state.count,
-        totalPrice:this.state.totalPrice
+        mealInfo: this.state.mealInfo,
+        storeInfo: this.state.storeInfo,
+        count: this.state.count,
+        totalPrice: this.state.totalPrice
       })
       .end((err, res)=> {
         if (err) return alert(err);
-        if(!res.body){
-          res.body=0;
-        }
         this.setState({
-          peopleStatus:res.body
+          peopleStatus: res.body-1
         });
-        alert(res.body);
       });
   }
 }

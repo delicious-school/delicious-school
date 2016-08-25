@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.post('/', function (req, res, next) {
   Dish.find({}, function (err, dishes) {
-    if (err) throw next(err);
+    if (err) return next(err);
     if (dishes) {
       res.send({dishes});
     } else {
@@ -13,9 +13,10 @@ router.post('/', function (req, res, next) {
   });
 });
 
-router.post('/storeOfDishes',function (req,res,next) {
-  const {dishstore} = req.body;
+router.get('/storeOfDishes/:dishstore',function (req,res,next) {
+  const dishstore = req.params.dishstore;
   Dish.find({dishstore:dishstore},function (err,storeOfDishes) {
+    console.log(storeOfDishes+'==========================================');
     if (err) return next(err);
     if(storeOfDishes){
       return res.send({storeOfDishes});

@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 import request from 'superagent';
@@ -14,10 +13,10 @@ export default class MealInfo extends Component {
       storeInfo: {}
     };
   }
-  componentWillMount(){
+
+  componentWillMount() {
     this.getCookie();
     this.getDishInformation();
-   // this.getStore();
   }
 
   render() {
@@ -48,11 +47,7 @@ export default class MealInfo extends Component {
                 <span>{this.state.count}</span>
                 <button onClick={this._addCount.bind(this)}>+</button>
               </h4>
-              <button
-                onClick={this.myOrder(dishname, dishprice, storename, storephone, storelocation, this.state.count)}
-                type="button"
-                className="btn btn-primary btn-meal-info">预订
-              </button>
+              <button type="button" className="btn btn-primary btn-meal-info">预订</button>
             </div>
           </div>
         </div>
@@ -88,29 +83,15 @@ export default class MealInfo extends Component {
       });
   }
 
-
-  getCookie(){
+  getCookie() {
     const self = this;
     request.post('/api/cookie')
-      .end((err,res) =>{
+      .end((err, res) => {
         const {username} = res.body;
         if (err) return alert(err);
         self.setState({
-          username:username
+          username: username
         });
       });
-  }
-
-  getStore(){
-    // request.post('/api/stores')
-    //   .send({storename:this.state.mealInfo.dishstore})
-    //   .end((err,res)=>{
-    //     if(err) return alert(err);
-    //     const storeInfo = res.body;
-    //     this.setState({
-    //       storeInfo:storeInfo
-    //     });
-    //     alert(storeInfo.storename + '           000000000');
-    //   });
   }
 }

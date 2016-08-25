@@ -3,7 +3,10 @@ import Register from './register.jsx';
 import App from './app.jsx';
 import Main from './main.jsx';
 import MealInfo from './meal-info.jsx';
-import Order from './order.jsx';
+
+import One from  './test-one.jsx';
+import Two from  './test-two.jsx';
+import Three from  './test-three.jsx';
 
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import React from 'react';
@@ -18,14 +21,20 @@ require('./style/meal-info.css');
 require('./style/order.css');
 
 
+
+
 const router = <Router history={hashHistory}>
   <Route path='/' component={App}>
     <IndexRoute component={Login}/>
     <Route path='login' component={Login}/>
     <Route path='register' component={Register}/>
-    <Route path='main' component={Main}/>
+    <Route path='main' component={Main}>
+      <IndexRoute component={One}/>
+      <Route path='one' component={One}/>
+      <Route path='two' component={Two}/>
+      <Route path='three' component={Three}/>
+      </Route>
     <Route path='meal-info(/:id)' component={MealInfo}/>
-    <Route path='order' component={Order}/>
   </Route>
 </Router>;
 
